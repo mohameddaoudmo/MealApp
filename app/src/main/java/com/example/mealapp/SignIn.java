@@ -97,6 +97,13 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
+        signupTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignIn.this, SignUp.class));
+
+            }
+        });
 
 
     }
@@ -199,4 +206,4 @@ public class SignIn extends AppCompatActivity {
         }).addOnFailureListener(e -> {
             loadingBar.dismiss();
         });
-}}
+    }}
