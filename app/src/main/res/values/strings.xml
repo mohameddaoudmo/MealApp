@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MealApp</string>
+    <string name="forgetpasswod">Did you forget the password?</string>
+    <string name="donothavaaccount">Don\'t have an account?</string>
+    <string name="Createanewaccount">Create a new account</string>
+    <string name="Welcome">Welcome</string>
+    <string name="Signin">Sign in</string>
+</resources>
