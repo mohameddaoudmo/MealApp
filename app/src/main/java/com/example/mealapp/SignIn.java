@@ -6,18 +6,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,10 +37,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Collections;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -40,6 +51,7 @@ public class SignIn extends AppCompatActivity {
     private static final int REQ_ONE_TAP = 2 ;// Can be any integer unique to the Activity.
     private boolean showOneTapUI = true;
     private static final int RC_SIGN_IN = 1;
+    private CheckBox remeberme;
 
     public static final String TAG="here";
     private FirebaseAuth firebaseAuth;
@@ -49,6 +61,10 @@ public class SignIn extends AppCompatActivity {
     private ProgressDialog progressDialog, loadingBar;
     private ImageView googleImageView, facebookImageView;
     private GoogleSignInClient mGoogleSignInClient;
+    private CallbackManager mCallbackManager;
+    private LoginButton facebookLoginButton;
+
+
 
 
     @Override
@@ -73,11 +89,54 @@ public class SignIn extends AppCompatActivity {
         forgetPasswordTextView = findViewById(R.id.forgetpassword);
         progressDialog = new ProgressDialog(this);
         googleImageView = findViewById(R.id.googleAuth);
+        mCallbackManager = CallbackManager.Factory.create();
+        facebookImageView = findViewById(R.id.facebookAuth);
+        remeberme =(CheckBox) findViewById(R.id.checkBox);
+        remeberme.setChecked(true);
+        SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+
+        String email = preferences.getString("email", "");
+        String password = preferences.getString("password","");
+
+        if (!email.isEmpty()) {
+            // Sign in user automatically
+            userLogin(email,password);
+        }
+
+        facebookLoginButton = findViewById(R.id.facebook_btn);
+        facebookLoginButton.setReadPermissions("email", "public_profile");
+
+        facebookLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookAccessToken(loginResult.getAccessToken());
+                progressDialog.setMessage("Signing in...");
+                progressDialog.show();
+                startActivity(new Intent(SignIn.this, MainActivity.class));
+                Toast.makeText(SignIn.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onError(@NonNull FacebookException error) {
+            }
+        });
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userLogin(emailEditText.getText().toString().trim(),passwordEditText.getText().toString().trim());
+                if (remeberme.isChecked()) {
+                    // Save user details in SharedPreferences
+                    SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+                    preferences.edit()
+                            .putString("email", emailEditText.getText().toString())
+                            .putString("password", passwordEditText.getText().toString())
+                            .apply();
+                }
 
             }
         });
@@ -97,6 +156,22 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
+        signupTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignIn.this, SignUp.class));
+
+            }
+        });
+        facebookImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                facebookLoginButton.performClick();
+                AccessToken accessToken = AccessToken.getCurrentAccessToken();
+                boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+                LoginManager.getInstance().logInWithReadPermissions(SignIn.this, Collections.singletonList("public_profile"));
+            }
+        });
 
 
     }
@@ -104,6 +179,8 @@ public class SignIn extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -121,6 +198,14 @@ public class SignIn extends AppCompatActivity {
                 FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                 startActivity(new Intent(this, MainActivity.class));
                 Toast.makeText(this, "You have successfully logged in", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void handleFacebookAccessToken(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
             }
         });
     }
@@ -199,4 +284,4 @@ public class SignIn extends AppCompatActivity {
         }).addOnFailureListener(e -> {
             loadingBar.dismiss();
         });
-}}
+    }}

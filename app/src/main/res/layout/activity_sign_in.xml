@@ -13,42 +13,44 @@
         android:layout_height="wrap_content"
         android:text="@string/Welcome"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/label"
+        app:layout_constraintStart_toStartOf="@+id/label"
         app:layout_constraintTop_toBottomOf="@+id/label" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="374dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelTextview" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="374dp"
         android:layout_height="58dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
     <Button
         android:id="@+id/signinButton"
         android:layout_width="195dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:foregroundGravity="center"
         android:text="@string/Signin"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <TextView
@@ -64,11 +66,32 @@
         app:layout_constraintStart_toStartOf="@+id/signinButton"
         app:layout_constraintTop_toBottomOf="@+id/signinButton" />
 
+    <!--    <ImageView-->
+    <!--        android:id="@+id/facebookAuth"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="41dp"-->
+    <!--        android:layout_marginStart="116dp"-->
+    <!--        android:layout_marginBottom="50dp"-->
+    <!--        android:src="@drawable/facebook"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/twitterAuth"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="41dp"-->
+    <!--        android:layout_marginStart="12dp"-->
+    <!--        android:layout_marginBottom="48dp"-->
+    <!--        android:src="@drawable/twitter"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/googleAuth" />-->
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
         android:text="@string/donothavaaccount"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,53 +101,100 @@
         android:id="@+id/createnewAccout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="40dp"
         android:text="@string/Createanewaccount"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-    <ImageView
-        android:id="@+id/facebookAuth"
-        android:layout_width="50dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginBottom="50dp"
-        android:src="@drawable/facebook"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/twitterAuth"
-        android:layout_width="50dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="48dp"
-        android:src="@drawable/twitter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/googleAuth" />
 
     <ImageView
         android:id="@+id/label"
         android:layout_width="167dp"
         android:layout_height="118dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/foodicon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--    <ImageView-->
+    <!--        android:id="@+id/googleAuth"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="41dp"-->
+    <!--        android:layout_marginStart="12dp"-->
+    <!--        android:layout_marginBottom="50dp"-->
+    <!--        android:src="@drawable/googlep"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/facebookAuth" />-->
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="60dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/twitterAuth"
+        app:layout_constraintStart_toEndOf="@+id/googleAuth"
+        app:layout_constraintTop_toBottomOf="@+id/createnewAccout">
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/facebookAuth"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/facebook" />
+
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/twitterAuth"
+        android:layout_width="65dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/twitter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createnewAccout" />
+
     <ImageView
         android:id="@+id/googleAuth"
-        android:layout_width="50dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="54dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center|end"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="100dp"
         android:src="@drawable/googlep"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/facebookAuth" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/remeberme"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createnewAccout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

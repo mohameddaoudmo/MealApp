@@ -5,4 +5,17 @@
     <string name="Createanewaccount">Create a new account</string>
     <string name="Welcome">Welcome</string>
     <string name="Signin">Sign in</string>
+    <string name="EnterYourName">EnterYourName</string>
+    <string name="EnterYourEmail">Enter Your Email</string>
+    <string name="EnteryourPassword">Enter Your Password</string>
+    <string name="SignUp">SignUp</string>
+    <string name="SignIn">Sign in</string>
+    <string name="DoYouhaveAnAccout">Do You have An Accout</string>
+
+    <string name="facebook_app_id">776491347287224</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">beb73a5f381ac5cf419dd0855ac09586</string>
+    <string name="remeberme">Remember ME</string>
+
+
 </resources>
