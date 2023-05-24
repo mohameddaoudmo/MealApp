@@ -74,10 +74,10 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                progressDialog.setMessage("جاري تسجيل الدخول...");
+                progressDialog.setMessage("Signing in...");
                 progressDialog.show();
                 startActivity(new Intent(SignUp.this, MainActivity.class));
-                Toast.makeText(SignUp.this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUp.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -144,7 +144,7 @@ public class SignUp extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                progressDialog.setMessage("جاري تسجيل الدخول...");
+                progressDialog.setMessage("Signing in...");
                 progressDialog.show();
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
@@ -159,7 +159,7 @@ public class SignUp extends AppCompatActivity {
             if (task.isSuccessful()) {
                 FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                 startActivity(new Intent(this, MainActivity.class));
-                Toast.makeText(this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Logged in successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -179,33 +179,33 @@ public class SignUp extends AppCompatActivity {
         String password = passwordEditText.getText().toString().trim();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "من فضلك أدخل الإسم", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter the name", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "من فضلك أدخل البريد الإلكتروني", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!email.matches(emailPattern)) {
-            Toast.makeText(this, "من فضلك أدخل بريد إلكتروني صحيح", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "من فضلك أدخل كلمة السر", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        progressDialog.setMessage("جاري إنشاء الحساب...");
+        progressDialog.setMessage("Account is being created...");
         progressDialog.show();
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(SignUp.this, "تم إنشاء الحساب بنجاح", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignUp.this, "Account successfully created", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(this, SignIn.class));
             } else if (password.length() < 6) {
-                Toast.makeText(this, "يجب أن تكون كلمة السر أكبر من 6", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Password must be greater than 6", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             } else {
-//                Toast.makeText(SignUpActivity.this, "هذا الحساب مسجل بالفعل أو أن هناك خطأ في الإتصال بالإنترنت",Toast.LENGTH_LONG).show();
+//                Toast.makeText(SignUpActivity.this, "This account is already registered or there is an error with the internet connection",Toast.LENGTH_LONG).show();
                 Toast.makeText(SignUp.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
