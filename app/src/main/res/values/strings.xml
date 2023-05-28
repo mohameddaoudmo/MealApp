@@ -24,6 +24,12 @@
     <string name="categories">Categories</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="getinspired">Get inspired</string>
+    <string name="name">Name</string>
+    <string name="ingreidient">Ingredient</string>
+    <string name="instruction">Instruction</string>
+    <string name="catagory">Catagory</string>
+    <string name="area">Area</string>
 
 
 </resources>

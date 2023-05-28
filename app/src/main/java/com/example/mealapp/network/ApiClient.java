@@ -2,6 +2,7 @@ package com.example.mealapp.network;
 
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Meals;
+import com.example.mealapp.model.MealswithLand;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -90,6 +91,10 @@ public class ApiClient implements RemoteSource{
         Call<Meals> meal = apiService.getRandomMeal();
 
         meal.enqueue(responseCallbackMe);
+
+
+
+
     }
 
 

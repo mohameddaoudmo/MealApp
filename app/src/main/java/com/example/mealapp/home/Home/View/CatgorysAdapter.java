@@ -44,6 +44,7 @@ public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView description;
+        private TextView name;
 
 
         private ImageView thumbnail;
@@ -54,8 +55,9 @@ public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             layout = itemView;
-            description = layout.findViewById(R.id.strcatgorydiscrption);
-            thumbnail =layout.findViewById(R.id.imgcatagories);
+            description = layout.findViewById(R.id.category_description);
+            thumbnail =layout.findViewById(R.id.category_thumbnail);
+            name =layout.findViewById(R.id.category_name);
 
 
         }
@@ -66,7 +68,7 @@ public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.customlayout, parent, false);
+        View v = inflater.inflate(R.layout.customlayoutforcategroy, parent, false);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;
@@ -76,6 +78,7 @@ public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.description.setText(categories.get(position).getStrCategoryDescription());
+        holder.name.setText(categories.get(position).getStrCategory());
         Glide.with(context)
                 .load(categories.get(position).getStrCategoryThumb())
                 .placeholder(R.drawable.ic_launcher_background)
