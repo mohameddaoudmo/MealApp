@@ -3,7 +3,7 @@ package com.example.mealapp.home.Home.presenter;
 import android.util.Log;
 
 import com.example.mealapp.home.Home.View.ViewHome;
-import com.example.mealapp.model.Categories;
+import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Meal;
 import com.example.mealapp.model.RepoInterface;
 import com.example.mealapp.network.NetworkDelegate;
@@ -22,7 +22,7 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
     }
 
     @Override
-    public void onSuccessResultCat(List<Categories.Category> categories) {
+    public void onSuccessResultCat(List<CategoriesM.Category> categories) {
         viewHome.setCategory(categories);
 
         Log.i(TAG,"Sucussc");

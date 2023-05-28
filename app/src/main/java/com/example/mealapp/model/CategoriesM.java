@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class Categories implements Serializable {
+public class CategoriesM implements Serializable {
 
     @SerializedName("categories")
     @Expose

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
-import com.example.mealapp.model.Categories;
+import com.example.mealapp.model.CategoriesM;
 
 
 import java.util.List;
@@ -21,24 +21,24 @@ import java.util.List;
 public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHolder> {
 
     Context context;
-    List<Categories.Category> categories;
+    List<CategoriesM.Category> categories;
     private OnClickListener listener;
     int mode;
 
-    public CatgorysAdapter(Context context, List<Categories.Category> categories, OnClickListener _listener , int mode) {
+    public CatgorysAdapter(Context context, List<CategoriesM.Category> categories, OnClickListener _listener , int mode) {
         this.context = context;
         this.categories = categories;
         this.listener = _listener;
         this.mode = mode;
     }
 
-    public void setList(List<Categories.Category> category){
+    public void setList(List<CategoriesM.Category> category){
         this.categories = category;
         this.notifyDataSetChanged();
     }
 
     public interface OnClickListener {
-        void onClick(Categories.Category category);
+        void onClick(CategoriesM.Category category);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

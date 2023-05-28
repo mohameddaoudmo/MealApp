@@ -1,7 +1,6 @@
 package com.example.mealapp.network;
 
-import com.example.mealapp.model.Categories;
-import com.example.mealapp.model.Meal;
+import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Meals;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,23 +52,23 @@ public class ApiClient implements RemoteSource{
 
 
     public void startCall(NetworkDelegate networkDelegator) {
-        Callback responseCallback = new Callback<Categories>(){
+        Callback responseCallback = new Callback<CategoriesM>(){
 
 
             @Override
-            public void onResponse(Call<Categories> call, retrofit2.Response<Categories> response) {
+            public void onResponse(Call<CategoriesM> call, retrofit2.Response<CategoriesM> response) {
                 if (response.isSuccessful()){
                     networkDelegator.onSuccessResultCat(response.body().getCategories());
                 }
             }
 
             @Override
-            public void onFailure(Call<Categories> call, Throwable t) {
+            public void onFailure(Call<CategoriesM> call, Throwable t) {
                 networkDelegator.onFailureResultCat(t.getMessage());
             }
         };
 
-        Call<Categories> categories = apiService.getCategories();
+        Call<CategoriesM> categories = apiService.getCategories();
 
         categories.enqueue(responseCallback);
         Callback responseCallbackMe = new Callback<Meals>(){
