@@ -16,6 +16,7 @@ import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
+import com.example.mealapp.model.Country;
 import com.example.mealapp.model.Meal;
 import com.example.mealapp.model.Repository;
 import com.example.mealapp.network.ApiClient;
@@ -91,6 +92,11 @@ public class Categories extends Fragment implements ViewHome, CatgorysAdapter.On
 
     @Override
     public void SetMeal(ArrayList<Meal> meal) {
+
+    }
+
+    @Override
+    public void SetCountry(List<Country> countries) {
 
     }
 }

@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
+import com.example.mealapp.model.Country;
 import com.example.mealapp.model.Meal;
 import com.example.mealapp.model.Repository;
 import com.google.android.material.navigation.NavigationView;
@@ -104,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements ViewHome , Catgor
                 .into(photoFormeal);
 
 
+
+    }
+
+    @Override
+    public void SetCountry(List<Country> countries) {
 
     }
 

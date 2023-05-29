@@ -1,11 +1,18 @@
 package com.example.mealapp.network;
 
 import com.example.mealapp.model.CategoriesM;
+import com.example.mealapp.model.Country;
+import com.example.mealapp.model.CountryResponse;
+import com.example.mealapp.model.Ingredient;
+import com.example.mealapp.model.IngredientList;
+import com.example.mealapp.model.IngredientResponse;
 import com.example.mealapp.model.Meals;
 import com.example.mealapp.model.MealswithLand;
+import com.example.mealapp.model.MyResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -13,11 +20,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient implements RemoteSource{
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
+    String name;
+    char c ;
 
 
     MealService apiService;
@@ -52,7 +62,7 @@ public class ApiClient implements RemoteSource{
     }
 
 
-    public void startCall(NetworkDelegate networkDelegator) {
+    public void startCall(NetworkDelegate networkDelegator,String name, char c) {
         Callback responseCallback = new Callback<CategoriesM>(){
 
 
@@ -92,6 +102,91 @@ public class ApiClient implements RemoteSource{
 
         meal.enqueue(responseCallbackMe);
 
+        Callback  responseCallbackLand = new Callback<CountryResponse>() {
+            @Override
+            public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
+                networkDelegator.onSuccessCountries(response.body().getCountries());
+                System.out.println("response"+response.body().getCountries());
+            }
+
+            @Override
+            public void onFailure(Call<CountryResponse> call, Throwable t) {
+
+            }
+        };
+        Call<CountryResponse> country = apiService.getAllCountries();
+
+        country.enqueue(responseCallbackLand);
+
+
+
+
+
+        Call<IngredientResponse> allIngredientsCall = apiService.getAllIngredients();
+
+        allIngredientsCall.enqueue(new Callback<IngredientResponse>() {
+            @Override
+            public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<IngredientList> ingredients = response.body().getMeals();
+                    networkDelegator.onSuccessIngredient(ingredients);
+                } else {
+                    networkDelegator.onFailure("Failed to get ingredients");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IngredientResponse> call, Throwable t) {
+                networkDelegator.onFailure(t.getMessage());
+            }
+        });
+
+
+
+        if (c == 'a') {
+            Call<MyResponse> allMealsByArea = apiService.getAllMealsByArea(name);
+            allMealsByArea.enqueue(new Callback<MyResponse>() {
+                @Override
+                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                    networkDelegator.onSuccessMealByFilter(response.body().getMeals());
+                }
+
+                @Override
+                public void onFailure(Call<MyResponse> call, Throwable t) {
+                    networkDelegator.onFailure(t.getMessage());
+                }
+            });
+        } else if (c == 'i') {
+            Call<MyResponse> allMealsByIngredient = apiService.getAllMealsByIngredient(name);
+            allMealsByIngredient.enqueue(new Callback<MyResponse>() {
+                @Override
+                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                    networkDelegator.onSuccessMealByFilter(response.body().getMeals());
+                }
+
+                @Override
+                public void onFailure(Call<MyResponse> call, Throwable t) {
+                    networkDelegator.onFailure(t.getMessage());
+                }
+            });
+        } else if (c == 'c') {
+            Call<MyResponse> allMealsByCategory = apiService.getAllMealsByCategory(name);
+            allMealsByCategory.enqueue(new Callback<MyResponse>() {
+                @Override
+                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                    networkDelegator.onSuccessMealByFilter(response.body().getMeals());
+                }
+
+                @Override
+                public void onFailure(Call<MyResponse> call, Throwable t) {
+                    networkDelegator.onFailure(t.getMessage());
+                }
+            });
+        }
+
+
+
+
 
 
 
@@ -102,7 +197,7 @@ public class ApiClient implements RemoteSource{
 
     @Override
     public void getFromNetwork(NetworkDelegate networkDelegate) {
-        ApiClient.getInstance().startCall(networkDelegate);
+        ApiClient.getInstance().startCall(networkDelegate,name,c);
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mealapp.home.Home.View;
 
 import com.example.mealapp.model.CategoriesM;
+import com.example.mealapp.model.Country;
 import com.example.mealapp.model.Meal;
 
 import java.util.ArrayList;
@@ -12,5 +13,6 @@ public interface ViewHome {
     void setCategory(List<CategoriesM.Category> category);
     void onErrorLoading(String message);
     void SetMeal(ArrayList<Meal> meal);
+    void SetCountry (List<Country> countries);
 
 }
