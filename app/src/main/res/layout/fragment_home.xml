@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.Home.View.Home" >
+    <ProgressBar
+        android:id="@+id/prograssbarHome"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="406dp"
+        android:layout_height="239dp"
+        android:layout_marginBottom="250dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        android:progressTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -12,6 +21,8 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+
+            android:id="@+id/linerfragmenthome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -29,8 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="352dp"
                 android:adjustViewBounds="true"
-                android:scaleType="matrix"
-                 />
+                android:scaleType="matrix" />
 
             <TextView
                 android:id="@+id/textView"
@@ -147,6 +157,7 @@
                 android:id="@+id/video_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -3,10 +3,13 @@ package com.example.mealapp.countryListMeal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -37,6 +40,7 @@ public class MealView extends AppCompatActivity implements ViewHome {
     MealPojo mealPojo;
     Button addtofav;
     Button removefromFav;
+    LinearLayout linearLayout;
 
 
     @Override
@@ -55,6 +59,23 @@ public class MealView extends AppCompatActivity implements ViewHome {
         photoMeal=findViewById(R.id.meal_imagemealdet);
         addtofav =findViewById(R.id.addtofavviewmeal);
         removefromFav =findViewById(R.id.removefromfavmealview);
+        ProgressBar progressBar = findViewById(R.id.prograssbar);
+        linearLayout =findViewById(R.id.linerlayoutmealview);
+
+// Set the ProgressBar to be visible
+        progressBar.setVisibility(View.VISIBLE);
+        linearLayout.setVisibility(View.INVISIBLE);
+
+// Use a Handler to schedule a message that will run after a delay
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Set the ProgressBar to be invisible after the delay
+                progressBar.setVisibility(View.INVISIBLE);
+                linearLayout.setVisibility(View.VISIBLE);
+
+            }
+        }, 3000);
 
 
         presenter = new MainPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(this), ApiClient.getInstance(),this));

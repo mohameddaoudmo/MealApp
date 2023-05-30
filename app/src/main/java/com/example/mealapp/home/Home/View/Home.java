@@ -6,12 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,8 +44,12 @@ public class Home extends Fragment implements ViewHome {
     MainPresenter presenter;
     Repository repo ;
     Button addtofav;
+    ScrollView scrollView ;
+
     Button deletefromfav;
     MealPojo mealPojo;
+    LinearLayout linearLayout;
+    ProgressBar progressBar;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -58,6 +66,11 @@ public class Home extends Fragment implements ViewHome {
         photoMeal= view.findViewById(R.id.meal_image);
         addtofav=view.findViewById(R.id.addtofavviewmealh);
         deletefromfav=view.findViewById(R.id.removefromfavmealviewh);
+        scrollView =view.findViewById(R.id.scrollView2);
+        progressBar=view.findViewById(R.id.prograssbarHome);
+        progressBar.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.INVISIBLE);
+//
         presenter = new MainPresenter(this,Repository.getInstance(ConcreteLocalSource.getInstance(getContext()), ApiClient.getInstance(),getContext()));
 
         presenter.getRandomMeal();
@@ -93,6 +106,17 @@ public class Home extends Fragment implements ViewHome {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+// Use a Handler to schedule a message that will run after a delay
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Set the ProgressBar to be invisible after the delay
+                progressBar.setVisibility(View.INVISIBLE);
+                scrollView.setVisibility(View.VISIBLE);
+
+            }
+        }, 5000);
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
