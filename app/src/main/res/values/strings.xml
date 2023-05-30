@@ -30,6 +30,7 @@
     <string name="instruction">Instruction</string>
     <string name="catagory">Catagory</string>
     <string name="area">Area</string>
+    <string name="addtocaleander">Add to Caleander</string>
 
 
 </resources>
