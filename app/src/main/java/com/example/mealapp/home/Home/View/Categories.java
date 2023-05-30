@@ -75,7 +75,7 @@ public class Categories extends Fragment implements ViewHome, CatgorysAdapter.On
         intent.putExtra("country_name"," ");
         startActivity(intent);
         ApiClient apiClient = ApiClient.getInstance();
-        apiClient.senddatapercountry(category.getStrCategory());
+        apiClient.senddataforCat(category.getStrCategory());
     }
 
 
@@ -85,9 +85,10 @@ public class Categories extends Fragment implements ViewHome, CatgorysAdapter.On
     }
 
     @Override
-    public void setMealforcat(List<Meal> meals) {
+    public void setMealpercat(List<Meal> meals) {
 
     }
+
 
     @Override
     public void showLoading() {

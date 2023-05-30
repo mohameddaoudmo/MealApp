@@ -30,6 +30,7 @@ public class ApiClient implements RemoteSource{
     String name;
     char c ='a' ;
     String Result;
+    String cat;
 
 
 
@@ -132,10 +133,26 @@ public class ApiClient implements RemoteSource{
             public void onFailure(Call<MyResponse> call, Throwable t) {
 
             }
-        };if (data!=null){
+        };if (data!=null) {
+            System.out.println(cat+"data in it");
         Call<MyResponse> mmealforlandeal = apiService.getAllMealsByArea(data);
 
         mmealforlandeal.enqueue(responsemeal);}
+        Callback  responsemealforcat = new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                networkDelegator.onSuccessMealByFilter(response.body().getMeals());
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
+            }
+        };if (cat!=null){
+            System.out.println(cat+"data in it");
+            Call<MyResponse> mealforcat = apiService.getAllMealsByCategory(cat);
+
+            mealforcat.enqueue(responsemealforcat);}
 
 
 
@@ -236,6 +253,9 @@ public void senddata (String s){
 this.data = s;
     System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+data);
 }
-
+    public void senddataforCat (String s){
+        this.cat = s;
+        System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+data);
+    }
 
 }

@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface ViewHome {
     void setMeal(List<Meal> meals);
+    void setMealpercat(List<Meal> meals);
+
 
     void showLoading();
     void hideLoading();

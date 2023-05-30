@@ -86,6 +86,11 @@ public class CountryInfo extends AppCompatActivity implements FragmentCallbacl,V
     }
 
     @Override
+    public void setMealpercat(List<Meal> meals) {
+
+    }
+
+    @Override
     public void showLoading() {
 
 

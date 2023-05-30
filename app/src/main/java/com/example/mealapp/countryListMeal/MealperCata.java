@@ -50,6 +50,7 @@ public class MealperCata extends AppCompatActivity implements FragmentCallbacl, 
         meal.setLayoutManager(manager);
         adapter = new CounteryinfoAdapter(MealperCata.this,mealArrayList , this, 0);
         meal.setAdapter(adapter);
+        presenter.getMeal();
 
 
 
@@ -78,13 +79,15 @@ public class MealperCata extends AppCompatActivity implements FragmentCallbacl, 
 
 
 
+
     }
 
     @Override
-    public void setMealforcat(List<Meal> meals) {
+    public void setMealpercat(List<Meal> meals) {
         adapter.setList(meals);
-
+        System.out.println("mealasdas");
     }
+
 
     @Override
     public void showLoading() {

@@ -83,6 +83,11 @@ public class Home extends Fragment implements ViewHome {
     }
 
     @Override
+    public void setMealpercat(List<Meal> meals) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }

@@ -51,16 +51,16 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
 
     @Override
     public void onSuccessMealByFilter(List<Meal> meals) {
-
-
+       viewHome.setMealpercat(meals);
 
     }
 
     @Override
     public void onSuccessMealByFilterland( List<Meal> meals) {
+        if(meals!=null){
         meals.get(0).getStrMeal();
         viewHome.setMeal(meals);
-        System.out.println(meals.get(1).getStrMeal());
+        System.out.println(meals.get(1).getStrMeal());}
 
     }
 

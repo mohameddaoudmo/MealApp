@@ -68,6 +68,11 @@ public class Country extends Fragment implements ViewHome, ViewinfoCountry, Coun
     }
 
     @Override
+    public void setMealpercat(List<Meal> meals) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }
