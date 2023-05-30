@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.mealapp.R;
 //import com.example.mealapp.countryListMeal.MealalperCata;
+import com.example.mealapp.countryListMeal.MealperCata;
 import com.example.mealapp.db.ConcreteLocalSource;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
@@ -70,15 +71,21 @@ public class Categories extends Fragment implements ViewHome, CatgorysAdapter.On
 
     @Override
     public void onClick(CategoriesM.Category category) {
-//        Intent intent = new Intent(getActivity(), MealperCata.class);
-//        intent.putExtra("country_name"," ");
-//        startActivity(intent);
-
+        Intent intent = new Intent(getActivity(), MealperCata.class);
+        intent.putExtra("country_name"," ");
+        startActivity(intent);
+        ApiClient apiClient = ApiClient.getInstance();
+        apiClient.senddatapercountry(category.getStrCategory());
     }
 
 
     @Override
     public void setMeal(List<Meal> meals) {
+
+    }
+
+    @Override
+    public void setMealforcat(List<Meal> meals) {
 
     }
 
