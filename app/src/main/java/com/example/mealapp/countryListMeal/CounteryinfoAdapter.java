@@ -44,8 +44,7 @@ public class CounteryinfoAdapter extends RecyclerView.Adapter<CounteryinfoAdapte
         TextView name;
         ImageView photo ;
         TextView id ;
-        ImageView fav;
-        Button addtocalender;
+       
         LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -53,9 +52,7 @@ public class CounteryinfoAdapter extends RecyclerView.Adapter<CounteryinfoAdapte
             name =itemView.findViewById(R.id.meal_name);
             id = itemView.findViewById(R.id.meal_id);
             photo =itemView.findViewById(R.id.meal_thumbnail);
-            fav = itemView.findViewById(R.id.favbutton);
             linearLayout =itemView.findViewById(R.id.meallayout);
-            addtocalender=itemView.findViewById(R.id.addtocaleander);
 
 
         }
@@ -89,18 +86,7 @@ public class CounteryinfoAdapter extends RecyclerView.Adapter<CounteryinfoAdapte
                     listener.onClick(meal);
                 }
             });
-            holder.addtocalender.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClickCalanender(meal);
-                }
-            });
-            holder.fav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClickFav(meal);
-                }
-            });
+
 
         holder.id.setText(meals.get(position).getIdMeal());
         holder.name.setText(meals.get(position).getStrMeal());

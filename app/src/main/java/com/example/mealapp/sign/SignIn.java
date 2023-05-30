@@ -1,4 +1,4 @@
-package com.example.mealapp;
+package com.example.mealapp.sign;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mealapp.R;
 import com.example.mealapp.home.Home.View.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;

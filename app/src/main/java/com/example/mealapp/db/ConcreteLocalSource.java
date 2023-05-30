@@ -53,6 +53,6 @@ public class ConcreteLocalSource implements LocalSource{
 
     @Override
     public LiveData<List<MealPojo>> getCachedMealfromfav() {
-        return null;
+        return productDAO.getAllProducts();
     }
 }

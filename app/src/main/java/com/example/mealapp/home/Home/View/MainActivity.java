@@ -11,6 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.fav.FavActivity;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
@@ -28,6 +30,7 @@ import com.example.mealapp.model.Meal;
 import com.example.mealapp.model.RandomMeal;
 import com.example.mealapp.model.Repository;
 import com.example.mealapp.network.ApiClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.sql.SQLOutput;
@@ -68,9 +71,28 @@ public class MainActivity extends AppCompatActivity{
                 findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navigationView , navController);
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent intent = new Intent(MainActivity.this, FavActivity.class);
+                        startActivity(intent);
 
+
+                        return true;
+                    case R.id.navigation_dashboard:
+                        // Handle Dashboard navigation
+                        return true;
+
+                }
+                return false;
+            }
+        });
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

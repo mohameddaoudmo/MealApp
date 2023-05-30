@@ -33,6 +33,7 @@
     <string name="addtocaleander">Add to Caleander</string>
     <string name="addtofav">Add to Favourite</string>
     <string name="removefromfav">Remove From FAVOURITE</string>
+    <string name="deletefromfav">Delete From Favourite</string>
 
 
 </resources>

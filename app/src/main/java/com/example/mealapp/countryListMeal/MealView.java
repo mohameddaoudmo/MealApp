@@ -126,10 +126,13 @@ public class MealView extends AppCompatActivity implements ViewHome {
                 +meal.get(0).getStrIngredient20());
         instruction.setText(meal.get(0).getStrInstructions());
         mealPojo.setIdMeal(Integer.parseInt(meal.get(0).getIdMeal()));
+        mealPojo.setStrMealThumb(meal.get(0).getStrMealThumb());
+        mealPojo.setStrMealThumb(meal.get(0).getStrMealThumb());
 
         mealPojo.setStrCategory(meal.get(0).getStrCategory());
         mealPojo.setStrYoutube(meal.get(0).getStrArea());
         mealPojo.setStrMeal(meal.get(0).getStrMeal());
+
         mealPojo.setStrArea(meal.get(0).getStrArea());
         mealPojo.setStrIngredient1(meal.get(0).getStrIngredient1());
         mealPojo.setStrIngredient2(meal.get(0).getStrIngredient2());
@@ -140,6 +143,15 @@ public class MealView extends AppCompatActivity implements ViewHome {
         mealPojo.setStrIngredient7(meal.get(0).getStrIngredient7());
         mealPojo.setStrIngredient8(meal.get(0).getStrIngredient8());
         mealPojo.setStrIngredient9(meal.get(0).getStrIngredient9());
+        mealPojo.setStrIngredient10(meal.get(0).getStrIngredient1());
+        mealPojo.setStrIngredient11(meal.get(0).getStrIngredient2());
+        mealPojo.setStrIngredient12(meal.get(0).getStrIngredient3());
+        mealPojo.setStrIngredient13(meal.get(0).getStrIngredient4());
+        mealPojo.setStrIngredient13(meal.get(0).getStrIngredient5());
+        mealPojo.setStrIngredient14(meal.get(0).getStrIngredient6());
+        mealPojo.setStrIngredient15(meal.get(0).getStrIngredient7());
+        mealPojo.setStrIngredient16(meal.get(0).getStrIngredient8());
+        mealPojo.setStrIngredient17(meal.get(0).getStrIngredient9());
 
     }
 

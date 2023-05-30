@@ -29,19 +29,4 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
 
-    <ImageView
-        android:id="@+id/favbutton"
-        android:layout_width="48dp"
-        android:layout_height="45dp"
-        android:layout_gravity="end"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/favorite" />
-
-    <Button
-        android:id="@+id/addtocaleander"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_weight="1"
-        android:text="@string/addtocaleander" />
-
 </LinearLayout>
