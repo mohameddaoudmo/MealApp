@@ -15,6 +15,8 @@ public interface NetworkDelegate {
     public void onSuccessResultCat(List<CategoriesM.Category> categories);
     public void onFailureResultCat(String errorMessage);
     public void onSuccessResultRandMeal(ArrayList<RandomMeal> meal);
+    public void onSuccessResultMealPerID(ArrayList<RandomMeal> meal);
+
     public void onFailureResultRandMeal(String errorMessage);
 
 

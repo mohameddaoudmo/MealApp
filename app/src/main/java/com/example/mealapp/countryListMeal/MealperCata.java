@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.home.Home.View.CountryInfo;
 import com.example.mealapp.home.Home.View.FragmentCallbacl;
 import com.example.mealapp.home.Home.View.ViewHome;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
@@ -65,13 +67,23 @@ public class MealperCata extends AppCompatActivity implements FragmentCallbacl, 
 
     @Override
     public void onClick(Meal meal) {
+        Intent intent = new Intent(MealperCata.this, MealView.class);
+        intent.putExtra("country_name", "");
+        startActivity(intent);
+        ApiClient apiClient = ApiClient.getInstance();
+        apiClient.senddataformealId(meal.getIdMeal());
 
     }
 
+    @Override
+    public void onClickFav(Meal meal) {
 
+    }
 
+    @Override
+    public void onClickCalanender(Meal meal) {
 
-
+    }
 
 
     @Override
@@ -86,6 +98,11 @@ public class MealperCata extends AppCompatActivity implements FragmentCallbacl, 
     public void setMealpercat(List<Meal> meals) {
         adapter.setList(meals);
         System.out.println("mealasdas");
+    }
+
+    @Override
+    public void setMealPerID(ArrayList<RandomMeal> meal) {
+
     }
 
 

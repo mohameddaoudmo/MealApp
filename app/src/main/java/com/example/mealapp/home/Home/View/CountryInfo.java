@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.mealapp.R;
 import com.example.mealapp.countryListMeal.CounteryinfoAdapter;
+import com.example.mealapp.countryListMeal.MealView;
 import com.example.mealapp.countryListMeal.Presenter;
 import com.example.mealapp.countryListMeal.ViewinfoCountry;
 import com.example.mealapp.db.ConcreteLocalSource;
@@ -67,13 +69,23 @@ public class CountryInfo extends AppCompatActivity implements FragmentCallbacl,V
 
     @Override
     public void onClick(Meal meal) {
+        Intent intent = new Intent(CountryInfo.this, MealView.class);
+        intent.putExtra("country_name", "");
+        startActivity(intent);
+        ApiClient apiClient = ApiClient.getInstance();
+        apiClient.senddataformealId(meal.getIdMeal());
 
     }
 
+    @Override
+    public void onClickFav(Meal meal) {
 
+    }
 
+    @Override
+    public void onClickCalanender(Meal meal) {
 
-
+    }
 
 
     @Override
@@ -87,6 +99,11 @@ public class CountryInfo extends AppCompatActivity implements FragmentCallbacl,V
 
     @Override
     public void setMealpercat(List<Meal> meals) {
+
+    }
+
+    @Override
+    public void setMealPerID(ArrayList<RandomMeal> meal) {
 
     }
 

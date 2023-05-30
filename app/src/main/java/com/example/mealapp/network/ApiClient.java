@@ -29,7 +29,7 @@ public class ApiClient implements RemoteSource{
     String data;
     String name;
     char c ='a' ;
-    String Result;
+    String mealID;
     String cat;
 
 
@@ -71,6 +71,7 @@ public class ApiClient implements RemoteSource{
 
 
         Callback responseCallback = new Callback<CategoriesM>(){
+
 
 
             @Override
@@ -225,7 +226,27 @@ public class ApiClient implements RemoteSource{
             Call<MyResponse> allMealsByCats = apiService.getAllMealsByArea(name);
             allMealsByCats.enqueue(allMealsByCat);
         }
+        Callback mealPerId = new Callback<Meals>(){
 
+
+            @Override
+            public void onResponse(Call<Meals> call, retrofit2.Response<Meals> response) {
+                if (response.isSuccessful()){
+                    networkDelegator.onSuccessResultMealPerID(response.body().getMeals());
+                    System.out.println("mealmeal"+response.body().getMeals().get(0).getStrMeal());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Meals> call, Throwable t) {
+
+            }
+        };
+if(mealPerId!=null){
+        Call<Meals> mealperId = apiService.getMealById(mealID);
+
+        mealperId.enqueue(mealPerId);}
 
 
 
@@ -256,6 +277,10 @@ this.data = s;
     public void senddataforCat (String s){
         this.cat = s;
         System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+data);
+    }
+    public void senddataformealId(String s){
+        this.mealID = s;
+        System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+mealID);
     }
 
 }

@@ -89,6 +89,13 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
     }
 
     @Override
+    public void onSuccessResultMealPerID(ArrayList<RandomMeal> meal) {
+        viewHome.setMealPerID(meal);
+        System.out.println("Egyptian food"+meal.get(0).getStrMeal());
+
+    }
+
+    @Override
     public void onFailureResultRandMeal(String errorMessage) {
 
     }

@@ -109,6 +109,11 @@ public class Countries extends Fragment implements ViewHome, ViewinfoCountry, Co
     }
 
     @Override
+    public void setMealPerID(ArrayList<RandomMeal> meal) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }

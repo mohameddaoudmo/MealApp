@@ -89,6 +89,11 @@ public class Categories extends Fragment implements ViewHome, CatgorysAdapter.On
 
     }
 
+    @Override
+    public void setMealPerID(ArrayList<RandomMeal> meal) {
+
+    }
+
 
     @Override
     public void showLoading() {

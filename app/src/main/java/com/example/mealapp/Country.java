@@ -23,7 +23,7 @@ import com.example.mealapp.network.ApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Country extends Fragment implements ViewHome, ViewinfoCountry, CounteryinfoAdapter.OnClickListener {
+public class Country extends Fragment implements ViewHome, ViewinfoCountry {
 
     MainPresenter presenter;
 
@@ -51,10 +51,7 @@ public class Country extends Fragment implements ViewHome, ViewinfoCountry, Coun
         return inflater.inflate(R.layout.fragment_country, container, false);
     }
 
-    @Override
-    public void onClick(Meal meal) {
 
-    }
 
     @Override
     public void showMeal(List<Meal> meals) {
@@ -69,6 +66,11 @@ public class Country extends Fragment implements ViewHome, ViewinfoCountry, Coun
 
     @Override
     public void setMealpercat(List<Meal> meals) {
+
+    }
+
+    @Override
+    public void setMealPerID(ArrayList<RandomMeal> meal) {
 
     }
 

@@ -5,7 +5,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.model.CategoriesM;
+import com.example.mealapp.model.Country;
 import com.example.mealapp.model.Meal;
 
 import java.util.List;
@@ -42,12 +45,17 @@ public class CounteryinfoAdapter extends RecyclerView.Adapter<CounteryinfoAdapte
         ImageView photo ;
         TextView id ;
         ImageView fav;
+        Button addtocalender;
+        LinearLayout linearLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name =itemView.findViewById(R.id.meal_name);
             id = itemView.findViewById(R.id.meal_id);
             photo =itemView.findViewById(R.id.meal_thumbnail);
             fav = itemView.findViewById(R.id.favbutton);
+            linearLayout =itemView.findViewById(R.id.meallayout);
+            addtocalender=itemView.findViewById(R.id.addtocaleander);
 
 
         }
@@ -65,11 +73,35 @@ public class CounteryinfoAdapter extends RecyclerView.Adapter<CounteryinfoAdapte
     }
     public interface OnClickListener {
         void onClick(Meal meal);
+        void onClickFav(Meal meal);
+        void  onClickCalanender(Meal meal);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull CounteryinfoAdapter.ViewHolder holder, int position) {
         if (meals!= null){
+            Meal meal = meals.get(position);
+
+            holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(meal);
+                }
+            });
+            holder.addtocalender.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClickCalanender(meal);
+                }
+            });
+            holder.fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClickFav(meal);
+                }
+            });
+
         holder.id.setText(meals.get(position).getIdMeal());
         holder.name.setText(meals.get(position).getStrMeal());
         Glide.with(context)

@@ -88,6 +88,11 @@ public class Home extends Fragment implements ViewHome {
     }
 
     @Override
+    public void setMealPerID(ArrayList<RandomMeal> meal) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }

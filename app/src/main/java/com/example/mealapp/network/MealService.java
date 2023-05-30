@@ -28,6 +28,8 @@ public interface MealService {
 
     @GET("filter.php?")
     Call<MyResponse> getAllMealsByCategory(@Query("c") String category);
+    @GET("lookup.php")
+    Call<Meals> getMealById(@Query("i") String mealId);
 
     @GET("list.php?a=list")
     Call<CountryResponse> getAllCountries();
