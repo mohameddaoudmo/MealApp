@@ -5,11 +5,14 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.example.mealapp.db.LocalSource;
+import com.example.mealapp.network.ApiClient;
 import com.example.mealapp.network.NetworkDelegate;
 import com.example.mealapp.network.RemoteSource;
 
 
 import java.util.List;
+
+import retrofit2.Callback;
 
 public class Repository implements RepoInterface{
 
@@ -35,8 +38,15 @@ public class Repository implements RepoInterface{
 
 
     @Override
-    public void getfromNetwork(NetworkDelegate networkDelegate) {
-        remoteSource.getFromNetwork(networkDelegate);
-    }}
+    public void getfromNetwork(NetworkDelegate networkDelegate, String name , char c) {
+        remoteSource.getFromNetwork(networkDelegate ,name ,c);
+    }
+
+
+
+
+
+
+}
 
 

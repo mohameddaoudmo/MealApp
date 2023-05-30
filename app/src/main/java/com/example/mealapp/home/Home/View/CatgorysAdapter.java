@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.model.CategoriesM;
+import com.example.mealapp.model.Country;
 
 
 import java.util.List;
@@ -45,6 +47,7 @@ public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHo
 
         private TextView description;
         private TextView name;
+        private LinearLayout linearLayout;
 
 
         private ImageView thumbnail;
@@ -55,6 +58,7 @@ public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             layout = itemView;
+            linearLayout =layout.findViewById(R.id.layoutcata);
             description = layout.findViewById(R.id.category_description);
             thumbnail =layout.findViewById(R.id.category_thumbnail);
             name =layout.findViewById(R.id.category_name);
@@ -76,7 +80,14 @@ public class CatgorysAdapter extends RecyclerView.Adapter<CatgorysAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        CategoriesM.Category category = categories.get(position);
 
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(category);
+            }
+        });
         holder.description.setText(categories.get(position).getStrCategoryDescription());
         holder.name.setText(categories.get(position).getStrCategory());
         Glide.with(context)

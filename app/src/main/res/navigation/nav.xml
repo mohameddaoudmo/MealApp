@@ -18,5 +18,14 @@
         android:id="@+id/countries"
         android:name="com.example.mealapp.home.Home.View.Countries"
         android:label="fragment_countries"
-        tools:layout="@layout/fragment_countries" />
+        tools:layout="@layout/fragment_countries" >
+        <action
+            android:id="@+id/action_countries_to_country"
+            app:destination="@id/country" />
+    </fragment>
+    <fragment
+        android:id="@+id/country"
+        android:name="com.example.mealapp.Country"
+        android:label="fragment_country"
+        tools:layout="@layout/fragment_country" />
 </navigation>

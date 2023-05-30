@@ -1,29 +1,67 @@
 package com.example.mealapp.home.Home.presenter;
 
 import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+
+import com.example.mealapp.countryListMeal.CounteryinfoAdapter;
 import com.example.mealapp.home.Home.View.ViewHome;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
 import com.example.mealapp.model.IngredientList;
 import com.example.mealapp.model.Meal;
+import com.example.mealapp.model.RandomMeal;
 import com.example.mealapp.model.RepoInterface;
+import com.example.mealapp.network.ApiClient;
 import com.example.mealapp.network.NetworkDelegate;
+import com.example.mealapp.network.RemoteSource;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Callback;
+
 public class MainPresenter implements NetworkDelegate, Ipresenter {
+    char c;
     ViewHome viewHome;
     private RepoInterface repoInterface;
     final static String TAG ="main";
     String country ;
+    ApiClient apiClient;
+    RemoteSource remoteSource;
+    View view ;
+    String data;
+    List <Meal>meal ;
+    CounteryinfoAdapter counteryinfoAdapter;
+
+
 
 
     public MainPresenter(ViewHome viewHome, RepoInterface repoInterface) {
+
         this.viewHome = viewHome;
         this.repoInterface = repoInterface;
-        System.out.println(country);
+
+
+
+    }
+
+
+    @Override
+    public void onSuccessMealByFilter(List<Meal> meals) {
+
+
+
+    }
+
+    @Override
+    public void onSuccessMealByFilterland( List<Meal> meals) {
+        meals.get(0).getStrMeal();
+        viewHome.setMeal(meals);
+        System.out.println(meals.get(1).getStrMeal());
+
     }
 
     @Override
@@ -41,8 +79,9 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
     }
 
     @Override
-    public void onSuccessResultRandMeal(ArrayList<Meal> meal) {
-        viewHome.SetMeal(meal);
+    public void onSuccessResultRandMeal(ArrayList<RandomMeal> meal) {
+        viewHome.SetRandomMeal(meal);
+
 
 
 
@@ -54,10 +93,9 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
 
     }
 
-    @Override
-    public void onSuccessMealByFilter(List<Meal> meals) {
 
-    }
+
+
 
     @Override
     public void onFailure(String error) {
@@ -65,9 +103,8 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
     }
 
     @Override
-    public void onSuccessCountries(List<Country> countries) {
+    public void onSuccessCountries(List<Country> countries ) {
         viewHome.SetCountry(countries);
-        country =countries.get(0).getStrArea();
     }
 
     @Override
@@ -77,17 +114,17 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
 
     @Override
     public void getcategory() {
-        repoInterface.getfromNetwork(this);
+        repoInterface.getfromNetwork(this,data,c);
     }
 
     @Override
     public void getRandomMeal() {
-        repoInterface.getfromNetwork(this);
+        repoInterface.getfromNetwork(this,data,c);
     }
 
     @Override
     public void getCountry() {
-        repoInterface.getfromNetwork(this);
+        repoInterface.getfromNetwork(this,data,c);
 
     }
 
@@ -95,4 +132,15 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
     public void getIngredient() {
 
     }
+
+
+
+    @Override
+    public void getMeal() {
+        repoInterface.getfromNetwork(this,data,c
+
+        );
+    }
+
+
 }

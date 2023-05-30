@@ -20,6 +20,7 @@ import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
 import com.example.mealapp.model.Meal;
+import com.example.mealapp.model.RandomMeal;
 import com.example.mealapp.model.Repository;
 import com.example.mealapp.network.ApiClient;
 
@@ -75,6 +76,12 @@ public class Home extends Fragment implements ViewHome {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+
+    @Override
+    public void setMeal(List<Meal> meals) {
+
+    }
+
     @Override
     public void showLoading() {
 
@@ -96,7 +103,7 @@ public class Home extends Fragment implements ViewHome {
     }
 
     @Override
-    public void SetMeal(ArrayList<Meal> meal) {
+    public void SetRandomMeal(ArrayList<RandomMeal> meal) {
         Glide.with(this)
                 .load(meal.get(0).getStrMealThumb())
                 .placeholder(R.drawable.ic_launcher_background)
@@ -127,4 +134,6 @@ public class Home extends Fragment implements ViewHome {
     public void SetCountry(List<Country> countries) {
 
     }
+
+
 }

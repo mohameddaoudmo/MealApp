@@ -1,5 +1,6 @@
 package com.example.mealapp.home.Home.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,11 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mealapp.R;
+import com.example.mealapp.countryListMeal.Presenter;
+import com.example.mealapp.countryListMeal.ViewinfoCountry;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.home.Home.presenter.Ipresenter;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
 import com.example.mealapp.model.Meal;
+import com.example.mealapp.model.RandomMeal;
 import com.example.mealapp.model.Repository;
 import com.example.mealapp.network.ApiClient;
 
@@ -25,18 +30,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Countries extends Fragment implements ViewHome, CountryAdapter.OnClickListener  {
+public class Countries extends Fragment implements ViewHome, ViewinfoCountry, CountryAdapter.OnClickListener  {
     RecyclerView countryrec;
     CountryAdapter adapter;
     MainPresenter presenter;
     Repository repo;
     Country country;
+    Ipresenter ipresenter;
+    String meal;
+    Presenter Copresenter ;
 
     List<Country> countries;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         countries = new ArrayList<>();
         countryrec = view.findViewById(R.id.countryrecy);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -44,9 +53,11 @@ public class Countries extends Fragment implements ViewHome, CountryAdapter.OnCl
         countryrec.setLayoutManager(manager);
         adapter = new CountryAdapter(getContext(), countries, this, 0);
         countryrec.setAdapter(adapter);
+
+        Copresenter = new Presenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext()), ApiClient.getInstance(), getContext()));
+
         presenter = new MainPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(getContext()), ApiClient.getInstance(), getContext()));
         presenter.getCountry();
-        System.out.println(country);
 
 
     }
@@ -70,9 +81,25 @@ public class Countries extends Fragment implements ViewHome, CountryAdapter.OnCl
     }
 
     @Override
-    public void onClick(Country country) {
-        this.country =country;
+    public void onClick(@NonNull Country country) {
 
+        this.country = country;
+        Intent intent = new Intent(getActivity(), CountryInfo.class);
+        intent.putExtra("country_name", country.getStrArea());
+        startActivity(intent);
+        ApiClient apiClient = ApiClient.getInstance();
+        apiClient.senddata(country.getStrArea());
+
+        presenter.getMeal();
+
+
+
+
+    }
+
+
+    @Override
+    public void setMeal(List<Meal> meals) {
 
     }
 
@@ -97,7 +124,7 @@ public class Countries extends Fragment implements ViewHome, CountryAdapter.OnCl
     }
 
     @Override
-    public void SetMeal(ArrayList<Meal> meal) {
+    public void SetRandomMeal(ArrayList<RandomMeal> meal) {
 
     }
 
@@ -105,6 +132,11 @@ public class Countries extends Fragment implements ViewHome, CountryAdapter.OnCl
     public void SetCountry(List<Country> countries) {
         adapter.setList(countries);
 
+    }
+
+
+    @Override
+    public void showMeal(List<Meal> meals) {
 
     }
 }

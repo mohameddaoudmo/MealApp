@@ -26,8 +26,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient implements RemoteSource{
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
+    String data;
     String name;
-    char c ;
+    char c ='a' ;
+    String Result;
+
 
 
     MealService apiService;
@@ -62,7 +65,10 @@ public class ApiClient implements RemoteSource{
     }
 
 
-    public void startCall(NetworkDelegate networkDelegator,String name, char c) {
+    public void startCall(NetworkDelegate networkDelegator ,String name , char c) {
+
+
+
         Callback responseCallback = new Callback<CategoriesM>(){
 
 
@@ -106,7 +112,6 @@ public class ApiClient implements RemoteSource{
             @Override
             public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
                 networkDelegator.onSuccessCountries(response.body().getCountries());
-                System.out.println("response"+response.body().getCountries());
             }
 
             @Override
@@ -117,71 +122,91 @@ public class ApiClient implements RemoteSource{
         Call<CountryResponse> country = apiService.getAllCountries();
 
         country.enqueue(responseCallbackLand);
-
-
-
-
-
-        Call<IngredientResponse> allIngredientsCall = apiService.getAllIngredients();
-
-        allIngredientsCall.enqueue(new Callback<IngredientResponse>() {
+        Callback  responsemeal = new Callback<MyResponse>() {
             @Override
-            public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<IngredientList> ingredients = response.body().getMeals();
-                    networkDelegator.onSuccessIngredient(ingredients);
-                } else {
-                    networkDelegator.onFailure("Failed to get ingredients");
-                }
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                networkDelegator.onSuccessMealByFilterland(response.body().getMeals());
             }
 
             @Override
-            public void onFailure(Call<IngredientResponse> call, Throwable t) {
-                networkDelegator.onFailure(t.getMessage());
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+
             }
-        });
+        };if (data!=null){
+        Call<MyResponse> mmealforlandeal = apiService.getAllMealsByArea(data);
+
+        mmealforlandeal.enqueue(responsemeal);}
+
+
+
+
+
+
 
 
 
         if (c == 'a') {
-            Call<MyResponse> allMealsByArea = apiService.getAllMealsByArea(name);
-            allMealsByArea.enqueue(new Callback<MyResponse>() {
+            Callback allMealsByArea = new Callback<MyResponse>() {
                 @Override
-                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                public void onResponse(Call<MyResponse> call, Response<MyResponse> response){
                     networkDelegator.onSuccessMealByFilter(response.body().getMeals());
+
+
+
                 }
 
                 @Override
-                public void onFailure(Call<MyResponse> call, Throwable t) {
+                public void onFailure(Call call, Throwable t) {
                     networkDelegator.onFailure(t.getMessage());
+
+
                 }
-            });
+            };
+            Call<MyResponse> allMealsByArear = apiService.getAllMealsByArea(data);
+            allMealsByArear.enqueue(allMealsByArea);
+
+
+
+
         } else if (c == 'i') {
-            Call<MyResponse> allMealsByIngredient = apiService.getAllMealsByIngredient(name);
-            allMealsByIngredient.enqueue(new Callback<MyResponse>() {
+            Callback allMealsByIngreident = new Callback<MyResponse>() {
                 @Override
-                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                public void onResponse(Call<MyResponse> call, Response<MyResponse> response){
                     networkDelegator.onSuccessMealByFilter(response.body().getMeals());
+
+
+
                 }
 
                 @Override
-                public void onFailure(Call<MyResponse> call, Throwable t) {
+                public void onFailure(Call call, Throwable t) {
                     networkDelegator.onFailure(t.getMessage());
+
+
                 }
-            });
+            };
+            Call<MyResponse> allMealsByIngreidents = apiService.getAllMealsByArea(data);
+            allMealsByIngreidents.enqueue(allMealsByIngreident);
+
         } else if (c == 'c') {
-            Call<MyResponse> allMealsByCategory = apiService.getAllMealsByCategory(name);
-            allMealsByCategory.enqueue(new Callback<MyResponse>() {
+            Callback allMealsByCat = new Callback<MyResponse>() {
                 @Override
-                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                public void onResponse(Call<MyResponse> call, Response<MyResponse> response){
                     networkDelegator.onSuccessMealByFilter(response.body().getMeals());
+
+
+
                 }
 
                 @Override
-                public void onFailure(Call<MyResponse> call, Throwable t) {
+                public void onFailure(Call call, Throwable t) {
                     networkDelegator.onFailure(t.getMessage());
+
+
                 }
-            });
+            };
+            Call<MyResponse> allMealsByCats = apiService.getAllMealsByArea(name);
+            allMealsByCats.enqueue(allMealsByCat);
         }
 
 
@@ -195,9 +220,22 @@ public class ApiClient implements RemoteSource{
 
 
 
+
     @Override
-    public void getFromNetwork(NetworkDelegate networkDelegate) {
+    public void getFromNetwork(NetworkDelegate networkDelegate,String name, char c) {
+
+
+
         ApiClient.getInstance().startCall(networkDelegate,name,c);
+        this.name = name;
+
 
     }
+
+public void senddata (String s){
+this.data = s;
+    System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+data);
+}
+
+
 }
