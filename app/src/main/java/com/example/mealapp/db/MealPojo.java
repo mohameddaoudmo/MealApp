@@ -1,10 +1,14 @@
-package com.example.mealapp.model;
+package com.example.mealapp.db;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+@Entity(tableName = "Meal")
 
-public class RandomMeal {
-
-    private String idMeal;
+public class MealPojo {
+    @PrimaryKey
+    private int idMeal;
     private String strMeal;
     private String strDrinkAlternate;
     private String strCategory;
@@ -15,11 +19,11 @@ public class RandomMeal {
     private String strYoutube;
     private String strIngredient1;
 
-    public String getIdMeal() {
+    public int getIdMeal() {
         return idMeal;
     }
 
-    public void setIdMeal(String idMeal) {
+    public void setIdMeal(int idMeal) {
         this.idMeal = idMeal;
     }
 
@@ -439,10 +443,10 @@ public class RandomMeal {
         this.dateModified = dateModified;
     }
 
-    public RandomMeal() {
+    public MealPojo() {
     }
 
-    public RandomMeal(String idMeal, String strMeal, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified) {
+    public MealPojo(int idMeal, String strMeal, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified) {
         this.idMeal = idMeal;
         this.strMeal = strMeal;
         this.strDrinkAlternate = strDrinkAlternate;
@@ -544,3 +548,4 @@ public class RandomMeal {
 
     // getters and setters for all the fields
 }
+

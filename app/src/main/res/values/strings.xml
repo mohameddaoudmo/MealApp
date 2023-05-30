@@ -31,6 +31,8 @@
     <string name="catagory">Catagory</string>
     <string name="area">Area</string>
     <string name="addtocaleander">Add to Caleander</string>
+    <string name="addtofav">Add to Favourite</string>
+    <string name="removefromfav">Remove From FAVOURITE</string>
 
 
 </resources>

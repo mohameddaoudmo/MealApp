@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.db.MealPojo;
 import com.example.mealapp.home.Home.View.CountryInfo;
 import com.example.mealapp.home.Home.View.FragmentCallbacl;
 import com.example.mealapp.home.Home.View.ViewHome;
@@ -102,6 +103,26 @@ public class MealperCata extends AppCompatActivity implements FragmentCallbacl, 
 
     @Override
     public void setMealPerID(ArrayList<RandomMeal> meal) {
+
+    }
+
+    @Override
+    public void addmealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void addmealtocal(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtocal(MealPojo mealPojo) {
 
     }
 

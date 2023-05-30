@@ -147,7 +147,23 @@
                 android:id="@+id/video_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/addtofavviewmealh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addtofav" />
+
+                <Button
+                    android:id="@+id/removefromfavmealviewh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/removefromfav" />
+            </LinearLayout>
 
 
         </LinearLayout>

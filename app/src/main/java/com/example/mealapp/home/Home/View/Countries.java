@@ -17,6 +17,7 @@ import com.example.mealapp.R;
 import com.example.mealapp.countryListMeal.Presenter;
 import com.example.mealapp.countryListMeal.ViewinfoCountry;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.db.MealPojo;
 import com.example.mealapp.home.Home.presenter.Ipresenter;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
@@ -110,6 +111,26 @@ public class Countries extends Fragment implements ViewHome, ViewinfoCountry, Co
 
     @Override
     public void setMealPerID(ArrayList<RandomMeal> meal) {
+
+    }
+
+    @Override
+    public void addmealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void addmealtocal(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtocal(MealPojo mealPojo) {
 
     }
 

@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <meta-data
+        android:name="com.google.android.youtube.API_KEY"
+        android:value="AIzaSyAer2jphCEf7SBQtSEsF_xgAfM8sQfCP2s" />
 
     <application
         android:allowBackup="true"

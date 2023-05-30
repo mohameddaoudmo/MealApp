@@ -1,5 +1,6 @@
 package com.example.mealapp.home.Home.View;
 
+import com.example.mealapp.db.MealPojo;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
 import com.example.mealapp.model.Meal;
@@ -12,6 +13,10 @@ public interface ViewHome {
     void setMeal(List<Meal> meals);
     void setMealpercat(List<Meal> meals);
     void setMealPerID(ArrayList<RandomMeal> meal);
+    void addmealtofav(MealPojo mealPojo);
+    void addmealtocal(MealPojo mealPojo);
+    void deletemealtofav(MealPojo mealPojo);
+    void deletemealtocal(MealPojo mealPojo);
 
 
     void showLoading();

@@ -5,6 +5,11 @@ import android.content.Context;
 //import androidx.lifecycle.LiveData;
 
 
+import androidx.lifecycle.LiveData;
+
+import com.example.mealapp.model.Meal;
+import com.example.mealapp.model.RandomMeal;
+
 import java.util.List;
 
 public class ConcreteLocalSource implements LocalSource{
@@ -12,7 +17,7 @@ public class ConcreteLocalSource implements LocalSource{
     private ProductDAO productDAO;
     private static ConcreteLocalSource concreteLocalSource = null;
     private ConcreteLocalSource(Context context){
-//        productDAO = ProductDatabase.getInstance(context.getApplicationContext()).productDAO();
+        productDAO = ProductDatabase.getInstance(context.getApplicationContext()).productDAO();
     }
 
     public static synchronized ConcreteLocalSource getInstance(Context context){
@@ -23,26 +28,31 @@ public class ConcreteLocalSource implements LocalSource{
         return concreteLocalSource;
     }
 
-//    @Override
-//    public void insert(Product product) {
-//        new Thread(){
-//            public void run(){
-//                productDAO.insertProduct(product);
-//            }
-//        }.start();
-//    }
-//
-//    @Override
-//    public void delete(Product product) {
-//        new Thread(){
-//            public void run(){
-//                productDAO.deleteProduct(product);
-//            }
-//        }.start();
-//    }
-//
-//    @Override
-//    public LiveData<List<Product>> getCachedProducts() {
-//        return productDAO.getAllProducts();
-//    }
+    @Override
+    public void insertintofav(MealPojo meal) {
+        new Thread(){
+            public void run(){
+                productDAO.insertProduct(meal);
+            }
+        }.start();
+    }
+
+    @Override
+    public void deletefromfav(MealPojo meal) {
+        new Thread(){
+            public void run(){
+                productDAO.deleteProduct(meal);
+            }
+        }.start();
+    }
+
+
+
+
+
+
+    @Override
+    public LiveData<List<MealPojo>> getCachedMealfromfav() {
+        return null;
+    }
 }

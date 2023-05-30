@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.db.MealPojo;
 import com.example.mealapp.home.Home.View.ViewHome;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
@@ -31,12 +34,16 @@ public class MealView extends AppCompatActivity implements ViewHome {
     TextView instruction , mealinstreaction, watchintoutube,link;
     ImageView photoMeal;
     Repository repo ;
+    MealPojo mealPojo;
+    Button addtofav;
+    Button removefromFav;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_view);
+        mealPojo =new MealPojo();
         name =findViewById(R.id.meal_namedet);
         cata =findViewById(R.id.meal_categorydet);
         area=findViewById(R.id.meal_areadet);
@@ -46,10 +53,24 @@ public class MealView extends AppCompatActivity implements ViewHome {
         watchintoutube =findViewById(R.id.meal_youtube_titledet);
         link = findViewById(R.id.meal_youtube_linkdet);
         photoMeal=findViewById(R.id.meal_imagemealdet);
+        addtofav =findViewById(R.id.addtofavviewmeal);
+        removefromFav =findViewById(R.id.removefromfavmealview);
 
 
         presenter = new MainPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(this), ApiClient.getInstance(),this));
     presenter.getMeal();
+    addtofav.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.addmealtofav(mealPojo);
+        }
+    });
+    removefromFav.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.removemealtofav(mealPojo);
+        }
+    });
 
     }
 
@@ -83,6 +104,41 @@ public class MealView extends AppCompatActivity implements ViewHome {
                 +" "+meal.get(0).getStrIngredient16()+" "+meal.get(0).getStrIngredient17()+" "+meal.get(0).getStrIngredient18()+" "+meal.get(0).getStrIngredient19()
                 +meal.get(0).getStrIngredient20());
         instruction.setText(meal.get(0).getStrInstructions());
+        mealPojo.setIdMeal(Integer.parseInt(meal.get(0).getIdMeal()));
+
+        mealPojo.setStrCategory(meal.get(0).getStrCategory());
+        mealPojo.setStrYoutube(meal.get(0).getStrArea());
+        mealPojo.setStrMeal(meal.get(0).getStrMeal());
+        mealPojo.setStrArea(meal.get(0).getStrArea());
+        mealPojo.setStrIngredient1(meal.get(0).getStrIngredient1());
+        mealPojo.setStrIngredient2(meal.get(0).getStrIngredient2());
+        mealPojo.setStrIngredient3(meal.get(0).getStrIngredient3());
+        mealPojo.setStrIngredient4(meal.get(0).getStrIngredient4());
+        mealPojo.setStrIngredient5(meal.get(0).getStrIngredient5());
+        mealPojo.setStrIngredient6(meal.get(0).getStrIngredient6());
+        mealPojo.setStrIngredient7(meal.get(0).getStrIngredient7());
+        mealPojo.setStrIngredient8(meal.get(0).getStrIngredient8());
+        mealPojo.setStrIngredient9(meal.get(0).getStrIngredient9());
+
+    }
+
+    @Override
+    public void addmealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void addmealtocal(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtocal(MealPojo mealPojo) {
 
     }
 

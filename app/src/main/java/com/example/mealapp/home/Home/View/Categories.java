@@ -17,6 +17,7 @@ import com.example.mealapp.R;
 //import com.example.mealapp.countryListMeal.MealalperCata;
 import com.example.mealapp.countryListMeal.MealperCata;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.db.MealPojo;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
@@ -91,6 +92,26 @@ public class Categories extends Fragment implements ViewHome, CatgorysAdapter.On
 
     @Override
     public void setMealPerID(ArrayList<RandomMeal> meal) {
+
+    }
+
+    @Override
+    public void addmealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void addmealtocal(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtocal(MealPojo mealPojo) {
 
     }
 

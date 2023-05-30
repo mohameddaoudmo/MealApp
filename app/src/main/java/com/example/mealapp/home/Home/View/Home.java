@@ -10,12 +10,14 @@ import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
+import com.example.mealapp.db.MealPojo;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
@@ -37,11 +39,15 @@ public class Home extends Fragment implements ViewHome {
     ImageView photoMeal;
     MainPresenter presenter;
     Repository repo ;
+    Button addtofav;
+    Button deletefromfav;
+    MealPojo mealPojo;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         name =view.findViewById(R.id.meal_name);
+        mealPojo = new MealPojo();
         cata =view.findViewById(R.id.meal_category);
         area=view.findViewById(R.id.meal_area);
         ingreident =view.findViewById(R.id.meal_ingredients);
@@ -50,9 +56,23 @@ public class Home extends Fragment implements ViewHome {
         watchintoutube =view.findViewById(R.id.meal_youtube_title);
         link = view.findViewById(R.id.meal_youtube_link);
         photoMeal= view.findViewById(R.id.meal_image);
+        addtofav=view.findViewById(R.id.addtofavviewmealh);
+        deletefromfav=view.findViewById(R.id.removefromfavmealviewh);
         presenter = new MainPresenter(this,Repository.getInstance(ConcreteLocalSource.getInstance(getContext()), ApiClient.getInstance(),getContext()));
 
         presenter.getRandomMeal();
+        addtofav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.addmealtofav(mealPojo);
+            }
+        });
+        deletefromfav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.removemealtofav(mealPojo);
+            }
+        });
 
     }
 
@@ -89,6 +109,27 @@ public class Home extends Fragment implements ViewHome {
 
     @Override
     public void setMealPerID(ArrayList<RandomMeal> meal) {
+
+    }
+
+    @Override
+    public void addmealtofav(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void addmealtocal(MealPojo mealPojo) {
+
+    }
+
+    @Override
+    public void deletemealtofav(MealPojo mealPojo) {
+
+
+    }
+
+    @Override
+    public void deletemealtocal(MealPojo mealPojo) {
 
     }
 
@@ -132,6 +173,21 @@ public class Home extends Fragment implements ViewHome {
                 +" "+meal.get(0).getStrIngredient16()+" "+meal.get(0).getStrIngredient17()+" "+meal.get(0).getStrIngredient18()+" "+meal.get(0).getStrIngredient19()
                 +meal.get(0).getStrIngredient20());
         instruction.setText(meal.get(0).getStrInstructions());
+        mealPojo.setIdMeal(Integer.parseInt(meal.get(0).getIdMeal()));
+
+        mealPojo.setStrCategory(meal.get(0).getStrCategory());
+        mealPojo.setStrYoutube(meal.get(0).getStrArea());
+        mealPojo.setStrMeal(meal.get(0).getStrMeal());
+        mealPojo.setStrArea(meal.get(0).getStrArea());
+        mealPojo.setStrIngredient1(meal.get(0).getStrIngredient1());
+        mealPojo.setStrIngredient2(meal.get(0).getStrIngredient2());
+        mealPojo.setStrIngredient3(meal.get(0).getStrIngredient3());
+        mealPojo.setStrIngredient4(meal.get(0).getStrIngredient4());
+        mealPojo.setStrIngredient5(meal.get(0).getStrIngredient5());
+        mealPojo.setStrIngredient6(meal.get(0).getStrIngredient6());
+        mealPojo.setStrIngredient7(meal.get(0).getStrIngredient7());
+        mealPojo.setStrIngredient8(meal.get(0).getStrIngredient8());
+        mealPojo.setStrIngredient9(meal.get(0).getStrIngredient9());
 
 
 
