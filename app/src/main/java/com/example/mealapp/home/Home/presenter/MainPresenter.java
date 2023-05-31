@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.example.mealapp.countryListMeal.CounteryinfoAdapter;
 import com.example.mealapp.db.MealPojo;
+import com.example.mealapp.db.POJOmealPerCalander;
 import com.example.mealapp.home.Home.View.ViewHome;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
@@ -150,6 +151,17 @@ public class MainPresenter implements NetworkDelegate, Ipresenter {
     @Override
     public void addmealtofav(MealPojo meal) {
         repoInterface.insertintofav(meal);
+
+    }
+
+    @Override
+    public void removemealtocal(POJOmealPerCalander meal) {
+        repoInterface.deletefromCal(meal);
+    }
+
+    @Override
+    public void addmealtocal(POJOmealPerCalander meal) {
+        repoInterface.insertintoCa(meal);
 
     }
 

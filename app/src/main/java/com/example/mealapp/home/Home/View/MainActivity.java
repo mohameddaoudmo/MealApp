@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
+import com.example.mealapp.calander.CalanderActivity;
 import com.example.mealapp.db.ConcreteLocalSource;
 import com.example.mealapp.fav.FavActivity;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
@@ -83,8 +84,8 @@ public class MainActivity extends AppCompatActivity{
 
                         return true;
                     case R.id.navigation_dashboard:
-                        // Handle Dashboard navigation
-                        return true;
+                        Intent intents = new Intent(MainActivity.this, CalanderActivity.class);
+                        startActivity(intents);                        return true;
 
                 }
                 return false;

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.mealapp.db.LocalSource;
 import com.example.mealapp.db.MealPojo;
+import com.example.mealapp.db.POJOmealPerCalander;
 import com.example.mealapp.network.ApiClient;
 import com.example.mealapp.network.NetworkDelegate;
 import com.example.mealapp.network.RemoteSource;
@@ -57,6 +58,28 @@ public class Repository implements RepoInterface{
     @Override
     public void insertintofav(MealPojo product) {
         localSource.insertintofav(product);
+
+    }
+
+    @Override
+    public void insertintoCa(POJOmealPerCalander meal) {
+        localSource.insertintoCa(meal);
+    }
+
+    @Override
+    public void deletefromCal(POJOmealPerCalander mea) {
+        localSource.deletefromCal(mea);
+
+    }
+
+    @Override
+    public LiveData<List<POJOmealPerCalander>> getCachedMealfromCal(int id) {
+        return localSource.getCachedMealfromCal();
+    }
+
+    @Override
+    public void getid(int i) {
+        localSource.getid(i);
 
     }
 

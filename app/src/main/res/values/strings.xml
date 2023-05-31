@@ -34,6 +34,9 @@
     <string name="addtofav">Add to Favourite</string>
     <string name="removefromfav">Remove From FAVOURITE</string>
     <string name="deletefromfav">Delete From Favourite</string>
+    <string name="deletefromcal">Delete From Calander</string>
+    <string name="addtocal">Add to Calander</string>
+    <string name="removeformcal">Remove From Calander</string>
 
 
 </resources>

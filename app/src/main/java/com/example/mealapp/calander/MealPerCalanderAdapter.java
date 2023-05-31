@@ -1,4 +1,4 @@
-package com.example.mealapp.fav;
+package com.example.mealapp.calander;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,27 +14,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.db.MealPojo;
+import com.example.mealapp.db.POJOmealPerCalander;
 import com.example.mealapp.model.Meal;
 
 import java.util.List;
 
-public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
 
-    static List<MealPojo> meal ;
+
+public class MealPerCalanderAdapter extends RecyclerView.Adapter<MealPerCalanderAdapter.ViewHolder> {
+
+    static List<POJOmealPerCalander> meal ;
     Context context;
-    private FavAdapter.OnClickListener listener;
+    private OnClickListener listener;
     int mode;
 
-    public FavAdapter(Context context, List<MealPojo> meals, FavAdapter.OnClickListener listener, int mode ) {
+    public MealPerCalanderAdapter(Context context, List<POJOmealPerCalander> meals, MealPerCalanderAdapter.OnClickListener listener, int mode ) {
         this.meal = meals;
         this.context = context;
         this.listener = listener;
         this.mode = mode;
     }
-    public void setList(List<MealPojo> meals){
+    public void setList(List<POJOmealPerCalander> meals){
 
         this.meal = meals;
-
         this.notifyDataSetChanged();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,24 +68,24 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public FavAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MealPerCalanderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.customlayoutfav, parent, false);
-       ViewHolder vh = new ViewHolder(v);
+        MealPerCalanderAdapter.ViewHolder vh = new MealPerCalanderAdapter.ViewHolder(v);
 
         return vh;
     }
     public interface OnClickListener {
-        void onClick(MealPojo meal);
+        void onClick(POJOmealPerCalander meal);
         void onClickFav(Meal meal);
         void  onClickCalanender(Meal meal);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MealPerCalanderAdapter.ViewHolder holder, int position) {
         if (meal!= null){
-            holder.delete.setOnClickListener(new View.OnClickListener() {
+            holder.delete .setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onClick(meal.get(position));
@@ -97,12 +99,12 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
             holder.cata.setText(meal.get(0).getStrCategory());
             holder.area.setText(meal.get(0).getStrArea());
             holder.ingreident.setText(meal.get(0).getStrIngredient1()+" "+meal.get(0).getStrIngredient2()+" "+meal.get(0).getStrIngredient3()+" "+meal.get(0).getStrIngredient4()+" "+meal.get(0).getStrIngredient4()+" "+meal.get(0).getStrIngredient6()
-                    +" "+meal.get(0).getStrIngredient7()
+                            +" "+meal.get(0).getStrIngredient7()
 //                            +" "+meal.get(0).getStrIngredient8()+" "+meal.get(0).getStrIngredient9()+" "+meal.get(0).getStrIngredient10()+" "+meal.get(0).getStrIngredient11()
 //                    +" "+meal.get(0).getStrIngredient12()+" "+meal.get(0).getStrIngredient13()+" "+meal.get(0).getStrIngredient14()+" "+meal.get(0).getStrIngredient15()
 //                    +" "+meal.get(0).getStrIngredient16()+" "+meal.get(0).getStrIngredient17()+" "+meal.get(0).getStrIngredient18()+" "+meal.get(0).getStrIngredient19()
 //                    +meal.get(0).getStrIngredient20()
-                   );
+            );
             holder.instruction.setText(meal.get(0).getStrInstructions());
 
 

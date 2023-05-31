@@ -2,6 +2,8 @@ package com.example.mealapp.countryListMeal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.util.Linkify;
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
 import com.example.mealapp.db.MealPojo;
+import com.example.mealapp.db.POJOmealPerCalander;
 import com.example.mealapp.home.Home.View.ViewHome;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
@@ -26,6 +29,7 @@ import com.example.mealapp.model.Repository;
 import com.example.mealapp.network.ApiClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MealView extends AppCompatActivity implements ViewHome {
@@ -41,6 +45,14 @@ public class MealView extends AppCompatActivity implements ViewHome {
     Button addtofav;
     Button removefromFav;
     LinearLayout linearLayout;
+    Button addtocal;
+    Button removefromcal;
+    int day;
+    int year;
+
+    int mounth ;
+    RandomMeal randomMeal;
+    POJOmealPerCalander pojOmealPerCalander;
 
 
     @Override
@@ -51,6 +63,7 @@ public class MealView extends AppCompatActivity implements ViewHome {
         name =findViewById(R.id.meal_namedet);
         cata =findViewById(R.id.meal_categorydet);
         area=findViewById(R.id.meal_areadet);
+        pojOmealPerCalander = new POJOmealPerCalander();
         ingreident =findViewById(R.id.meal_ingredientsdet);
         instruction= findViewById(R.id.meal_instructions_titledet);
         mealinstreaction =findViewById(R.id.meal_instructionsdet);
@@ -61,6 +74,8 @@ public class MealView extends AppCompatActivity implements ViewHome {
         removefromFav =findViewById(R.id.removefromfavmealview);
         ProgressBar progressBar = findViewById(R.id.prograssbar);
         linearLayout =findViewById(R.id.linerlayoutmealview);
+        addtocal = findViewById(R.id.addtocalander);
+        removefromcal =findViewById(R.id.removefromcalander) ;
 
 // Set the ProgressBar to be visible
         progressBar.setVisibility(View.VISIBLE);
@@ -80,6 +95,18 @@ public class MealView extends AppCompatActivity implements ViewHome {
 
         presenter = new MainPresenter(this, Repository.getInstance(ConcreteLocalSource.getInstance(this), ApiClient.getInstance(),this));
     presenter.getMeal();
+    addtocal.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showDatePickerDialog();
+        }
+    });
+    removefromcal.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            presenter.removemealtocal(pojOmealPerCalander);
+        }
+    });
     addtofav.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -107,6 +134,8 @@ public class MealView extends AppCompatActivity implements ViewHome {
 
     @Override
     public void setMealPerID(ArrayList<RandomMeal> meal) {
+        this.randomMeal = meal.get(0);
+
         Glide.with(this)
                 .load(meal.get(0).getStrMealThumb())
                 .placeholder(R.drawable.ic_launcher_background)
@@ -153,6 +182,34 @@ public class MealView extends AppCompatActivity implements ViewHome {
         mealPojo.setStrIngredient16(meal.get(0).getStrIngredient8());
         mealPojo.setStrIngredient17(meal.get(0).getStrIngredient9());
 
+
+        pojOmealPerCalander.setIdMeal(Integer.parseInt(meal.get(0).getIdMeal()));
+        pojOmealPerCalander.setStrMealThumb(meal.get(0).getStrMealThumb());
+        pojOmealPerCalander.setStrMealThumb(meal.get(0).getStrMealThumb());
+
+        pojOmealPerCalander.setStrCategory(meal.get(0).getStrCategory());
+        pojOmealPerCalander.setStrYoutube(meal.get(0).getStrArea());
+        pojOmealPerCalander.setStrMeal(meal.get(0).getStrMeal());
+
+        pojOmealPerCalander.setStrArea(meal.get(0).getStrArea());
+        pojOmealPerCalander.setStrIngredient1(meal.get(0).getStrIngredient1());
+        pojOmealPerCalander.setStrIngredient2(meal.get(0).getStrIngredient2());
+        pojOmealPerCalander.setStrIngredient3(meal.get(0).getStrIngredient3());
+        pojOmealPerCalander.setStrIngredient4(meal.get(0).getStrIngredient4());
+        pojOmealPerCalander.setStrIngredient5(meal.get(0).getStrIngredient5());
+        pojOmealPerCalander.setStrIngredient6(meal.get(0).getStrIngredient6());
+        pojOmealPerCalander.setStrIngredient7(meal.get(0).getStrIngredient7());
+        pojOmealPerCalander.setStrIngredient8(meal.get(0).getStrIngredient8());
+        pojOmealPerCalander.setStrIngredient9(meal.get(0).getStrIngredient9());
+        pojOmealPerCalander.setStrIngredient10(meal.get(0).getStrIngredient1());
+        pojOmealPerCalander.setStrIngredient11(meal.get(0).getStrIngredient2());
+        pojOmealPerCalander.setStrIngredient12(meal.get(0).getStrIngredient3());
+        pojOmealPerCalander.setStrIngredient13(meal.get(0).getStrIngredient4());
+        pojOmealPerCalander.setStrIngredient13(meal.get(0).getStrIngredient5());
+        pojOmealPerCalander.setStrIngredient14(meal.get(0).getStrIngredient6());
+        pojOmealPerCalander.setStrIngredient15(meal.get(0).getStrIngredient7());
+        pojOmealPerCalander.setStrIngredient16(meal.get(0).getStrIngredient8());
+        pojOmealPerCalander.setStrIngredient17(meal.get(0).getStrIngredient9());
     }
 
     @Override
@@ -203,5 +260,46 @@ public class MealView extends AppCompatActivity implements ViewHome {
     @Override
     public void SetCountry(List<Country> countries) {
 
+    }
+    private void showDatePickerDialog() {
+        // Get the current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        // Create a new DatePickerDialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, null, year, month, day);
+
+        // Set the title and showthe spinners for the day of the week
+        datePickerDialog.setTitle("Select a day of the week");
+        datePickerDialog.getDatePicker().setCalendarViewShown(false);
+        datePickerDialog.getDatePicker().setSpinnersShown(true);
+
+        // Set the callback to handle the selected date
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Get the selected year, month, and day
+                int selectedYear = datePickerDialog.getDatePicker().getYear();
+                int selectedMonth = datePickerDialog.getDatePicker().getMonth();
+                int selectedDayOfMonth = datePickerDialog.getDatePicker().getDayOfMonth();
+                // Create a new Calendar instance and set the selected date
+                Calendar selectedDate = Calendar.getInstance();
+                selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth);
+
+                // Get the day of the week as an integer value
+                int dayOfWeek = selectedDate.get(Calendar.DAY_OF_WEEK);
+                 mounth = selectedDate.get(Calendar.DATE);
+                System.out.println(mounth);
+                pojOmealPerCalander.setDay(mounth);
+                presenter.addmealtocal(pojOmealPerCalander);
+
+
+            }
+        });
+
+        // Show the dialog
+        datePickerDialog.show();
     }
 }

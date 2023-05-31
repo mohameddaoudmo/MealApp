@@ -1,11 +1,21 @@
 package com.example.mealapp.home.Home.View;
 
+
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
@@ -50,10 +60,14 @@ public class Home extends Fragment implements ViewHome {
     MealPojo mealPojo;
     LinearLayout linearLayout;
     ProgressBar progressBar;
+    List<RandomMeal>check;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        check= new ArrayList<>();
+
         name =view.findViewById(R.id.meal_name);
         mealPojo = new MealPojo();
         cata =view.findViewById(R.id.meal_category);
@@ -70,7 +84,6 @@ public class Home extends Fragment implements ViewHome {
         progressBar=view.findViewById(R.id.prograssbarHome);
         progressBar.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.INVISIBLE);
-//
         presenter = new MainPresenter(this,Repository.getInstance(ConcreteLocalSource.getInstance(getContext()), ApiClient.getInstance(),getContext()));
 
         presenter.getRandomMeal();
@@ -86,6 +99,8 @@ public class Home extends Fragment implements ViewHome {
                 presenter.removemealtofav(mealPojo);
             }
         });
+
+
 
     }
 
@@ -105,19 +120,33 @@ public class Home extends Fragment implements ViewHome {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) ContextCompat.getSystemService(getContext(), ConnectivityManager.class);
+        // Get the current network state
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isConnected()) {
+            // There is no internet connection, set layout to invisible
+            scrollView.setVisibility(View.INVISIBLE);
+        } else {
+
+        }
+
         // Inflate the layout for this fragment
 
 // Use a Handler to schedule a message that will run after a delay
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 // Set the ProgressBar to be invisible after the delay
                 progressBar.setVisibility(View.INVISIBLE);
                 scrollView.setVisibility(View.VISIBLE);
 
             }
-        }, 5000);
+        }, 10000);
         return inflater.inflate(R.layout.fragment_home, container, false);
+
+
+
     }
 
 
@@ -179,6 +208,7 @@ public class Home extends Fragment implements ViewHome {
 
     @Override
     public void SetRandomMeal(ArrayList<RandomMeal> meal) {
+        this.check=meal;
         Glide.with(this)
                 .load(meal.get(0).getStrMealThumb())
                 .placeholder(R.drawable.ic_launcher_background)
