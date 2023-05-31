@@ -48,12 +48,7 @@ public class CalanderActivity extends AppCompatActivity implements OnclickListne
         adapter = new MealPerCalanderAdapter(CalanderActivity.this,perCalanders,CalanderActivity.this,1);
         recyclerViewcal.setAdapter(adapter);
         presenterCalander = new PresenterCalander( Repository.getInstance(ConcreteLocalSource.getInstance(this), ApiClient.getInstance(), this));
-        presenterCalander.getFromCalander(day).observe(this, new Observer<List<POJOmealPerCalander>>() {
-            @Override
-            public void onChanged(List<POJOmealPerCalander> products) {
-                adapter.setList(products);
-            }
-        });
+
 
         // Get TextView and GridView
         monthYearTV = findViewById(R.id.month_year_tv);
@@ -82,6 +77,12 @@ public class CalanderActivity extends AppCompatActivity implements OnclickListne
     public void onDayClick(int dayOfMonth) {
         presenterCalander.sendDay(dayOfMonth);
         this.day = dayOfMonth;
+        presenterCalander.getFromCalander(day).observe(this, new Observer<List<POJOmealPerCalander>>() {
+            @Override
+            public void onChanged(List<POJOmealPerCalander> products) {
+                adapter.setList(products);
+            }
+        });
 
 
     }
