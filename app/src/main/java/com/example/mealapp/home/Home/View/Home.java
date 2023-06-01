@@ -1,9 +1,6 @@
 package com.example.mealapp.home.Home.View;
 
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -12,10 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
+
 import android.os.Handler;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
@@ -68,18 +62,18 @@ public class Home extends Fragment implements ViewHome {
 
         check= new ArrayList<>();
 
-        name =view.findViewById(R.id.meal_name);
+        name =view.findViewById(R.id.meal_namese);
         mealPojo = new MealPojo();
-        cata =view.findViewById(R.id.meal_category);
-        area=view.findViewById(R.id.meal_area);
-        ingreident =view.findViewById(R.id.meal_ingredients);
-        instruction= view.findViewById(R.id.meal_instructions_title);
-        mealinstreaction =view.findViewById(R.id.meal_instructions);
-        watchintoutube =view.findViewById(R.id.meal_youtube_title);
-        link = view.findViewById(R.id.meal_youtube_link);
-        photoMeal= view.findViewById(R.id.meal_image);
-        addtofav=view.findViewById(R.id.addtofavviewmealh);
-        deletefromfav=view.findViewById(R.id.removefromfavmealviewh);
+        cata =view.findViewById(R.id.meal_categoryse);
+        area=view.findViewById(R.id.meal_arease);
+        ingreident =view.findViewById(R.id.meal_ingredientsse);
+        instruction= view.findViewById(R.id.meal_instructions_titlese);
+        mealinstreaction =view.findViewById(R.id.meal_instructionsse);
+        watchintoutube =view.findViewById(R.id.meal_youtube_titlese);
+        link = view.findViewById(R.id.meal_youtube_linkse);
+        photoMeal= view.findViewById(R.id.meal_imagese);
+        addtofav=view.findViewById(R.id.addtofavviewmealhse);
+        deletefromfav=view.findViewById(R.id.removefromfavmealviewhse);
         scrollView =view.findViewById(R.id.scrollView2);
         progressBar=view.findViewById(R.id.prograssbarHome);
         progressBar.setVisibility(View.VISIBLE);

@@ -6,6 +6,7 @@ import com.example.mealapp.model.CountryResponse;
 import com.example.mealapp.model.Ingredient;
 import com.example.mealapp.model.IngredientList;
 import com.example.mealapp.model.IngredientResponse;
+import com.example.mealapp.model.Meal;
 import com.example.mealapp.model.Meals;
 import com.example.mealapp.model.MealswithLand;
 import com.example.mealapp.model.MyResponse;
@@ -24,14 +25,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient implements RemoteSource{
+public class ApiClient implements RemoteSource {
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
     String data;
     String name;
-    char c ='a' ;
+    char c = 'a';
     String mealID;
     String cat;
-
+    String mealNameForSearch;
 
 
     MealService apiService;
@@ -45,6 +46,7 @@ public class ApiClient implements RemoteSource{
                 .build();
         apiService = retrofit.create(MealService.class);
     }
+
     private static Interceptor provideLoggingInterceptor() {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     }
@@ -58,25 +60,23 @@ public class ApiClient implements RemoteSource{
                 .build();
     }
 
-    public static synchronized ApiClient getInstance(){
-        if (apiClient == null){
+    public static synchronized ApiClient getInstance() {
+        if (apiClient == null) {
             apiClient = new ApiClient();
         }
         return apiClient;
     }
 
 
-    public void startCall(NetworkDelegate networkDelegator ,String name , char c) {
+    public void startCall(NetworkDelegate networkDelegator, String name, char c) {
 
 
-
-        Callback responseCallback = new Callback<CategoriesM>(){
-
+        Callback responseCallback = new Callback<CategoriesM>() {
 
 
             @Override
             public void onResponse(Call<CategoriesM> call, retrofit2.Response<CategoriesM> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     networkDelegator.onSuccessResultCat(response.body().getCategories());
                 }
             }
@@ -90,12 +90,12 @@ public class ApiClient implements RemoteSource{
         Call<CategoriesM> categories = apiService.getCategories();
 
         categories.enqueue(responseCallback);
-        Callback responseCallbackMe = new Callback<Meals>(){
+        Callback responseCallbackMe = new Callback<Meals>() {
 
 
             @Override
             public void onResponse(Call<Meals> call, retrofit2.Response<Meals> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     networkDelegator.onSuccessResultRandMeal(response.body().getMeals());
                 }
             }
@@ -110,7 +110,7 @@ public class ApiClient implements RemoteSource{
 
         meal.enqueue(responseCallbackMe);
 
-        Callback  responseCallbackLand = new Callback<CountryResponse>() {
+        Callback responseCallbackLand = new Callback<CountryResponse>() {
             @Override
             public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
                 networkDelegator.onSuccessCountries(response.body().getCountries());
@@ -124,7 +124,7 @@ public class ApiClient implements RemoteSource{
         Call<CountryResponse> country = apiService.getAllCountries();
 
         country.enqueue(responseCallbackLand);
-        Callback  responsemeal = new Callback<MyResponse>() {
+        Callback responsemeal = new Callback<MyResponse>() {
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                 networkDelegator.onSuccessMealByFilterland(response.body().getMeals());
@@ -134,12 +134,14 @@ public class ApiClient implements RemoteSource{
             public void onFailure(Call<MyResponse> call, Throwable t) {
 
             }
-        };if (data!=null) {
-            System.out.println(cat+"data in it");
-        Call<MyResponse> mmealforlandeal = apiService.getAllMealsByArea(data);
+        };
+        if (data != null) {
+            System.out.println(cat + "data in it");
+            Call<MyResponse> mmealforlandeal = apiService.getAllMealsByArea(data);
 
-        mmealforlandeal.enqueue(responsemeal);}
-        Callback  responsemealforcat = new Callback<MyResponse>() {
+            mmealforlandeal.enqueue(responsemeal);
+        }
+        Callback responsemealforcat = new Callback<MyResponse>() {
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                 networkDelegator.onSuccessMealByFilter(response.body().getMeals());
@@ -149,91 +151,23 @@ public class ApiClient implements RemoteSource{
             public void onFailure(Call<MyResponse> call, Throwable t) {
 
             }
-        };if (cat!=null){
-            System.out.println(cat+"data in it");
+        };
+        if (cat != null) {
+            System.out.println(cat + "data in it");
             Call<MyResponse> mealforcat = apiService.getAllMealsByCategory(cat);
 
-            mealforcat.enqueue(responsemealforcat);}
-
-
-
-
-
-
-
-
-
-        if (c == 'a') {
-            Callback allMealsByArea = new Callback<MyResponse>() {
-                @Override
-                public void onResponse(Call<MyResponse> call, Response<MyResponse> response){
-                    networkDelegator.onSuccessMealByFilter(response.body().getMeals());
-
-
-
-                }
-
-                @Override
-                public void onFailure(Call call, Throwable t) {
-                    networkDelegator.onFailure(t.getMessage());
-
-
-                }
-            };
-            Call<MyResponse> allMealsByArear = apiService.getAllMealsByArea(data);
-            allMealsByArear.enqueue(allMealsByArea);
-
-
-
-
-        } else if (c == 'i') {
-            Callback allMealsByIngreident = new Callback<MyResponse>() {
-                @Override
-                public void onResponse(Call<MyResponse> call, Response<MyResponse> response){
-                    networkDelegator.onSuccessMealByFilter(response.body().getMeals());
-
-
-
-                }
-
-                @Override
-                public void onFailure(Call call, Throwable t) {
-                    networkDelegator.onFailure(t.getMessage());
-
-
-                }
-            };
-            Call<MyResponse> allMealsByIngreidents = apiService.getAllMealsByArea(data);
-            allMealsByIngreidents.enqueue(allMealsByIngreident);
-
-        } else if (c == 'c') {
-            Callback allMealsByCat = new Callback<MyResponse>() {
-                @Override
-                public void onResponse(Call<MyResponse> call, Response<MyResponse> response){
-                    networkDelegator.onSuccessMealByFilter(response.body().getMeals());
-
-
-
-                }
-
-                @Override
-                public void onFailure(Call call, Throwable t) {
-                    networkDelegator.onFailure(t.getMessage());
-
-
-                }
-            };
-            Call<MyResponse> allMealsByCats = apiService.getAllMealsByArea(name);
-            allMealsByCats.enqueue(allMealsByCat);
+            mealforcat.enqueue(responsemealforcat);
         }
-        Callback mealPerId = new Callback<Meals>(){
+
+
+        Callback mealPerId = new Callback<Meals>() {
 
 
             @Override
             public void onResponse(Call<Meals> call, retrofit2.Response<Meals> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     networkDelegator.onSuccessResultMealPerID(response.body().getMeals());
-                    System.out.println("mealmeal"+response.body().getMeals().get(0).getStrMeal());
+                    System.out.println("mealmeal" + response.body().getMeals().get(0).getStrMeal());
 
                 }
             }
@@ -243,44 +177,69 @@ public class ApiClient implements RemoteSource{
 
             }
         };
-if(mealPerId!=null){
-        Call<Meals> mealperId = apiService.getMealById(mealID);
+        if (mealPerId != null) {
+            Call<Meals> mealperId = apiService.getMealById(mealID);
 
-        mealperId.enqueue(mealPerId);}
+            mealperId.enqueue(mealPerId);
+        }
+
+
+        Callback responseCallbacksearchmeal = new Callback<Meals>() {
+
+
+            @Override
+            public void onResponse(Call<Meals> call, Response<Meals> response) {
+                if (response.isSuccessful()) {
+                    networkDelegator.onSuccessResultwithsearch(response.body().getMeals());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Meals> call, Throwable t) {
+                System.out.println("failded");
+                networkDelegator.unchecksuccses(true);
+                networkDelegator.onFailureResultResearch(t.getMessage());
+
+            }
+        };
 
 
 
+            Call<Meals> searcmeal = apiService.searchMeals(mealNameForSearch);
+
+            searcmeal.enqueue(responseCallbacksearchmeal);
 
 
 
     }
 
 
-
-
-
     @Override
-    public void getFromNetwork(NetworkDelegate networkDelegate,String name, char c) {
+    public void getFromNetwork(NetworkDelegate networkDelegate, String name, char c) {
 
 
-
-        ApiClient.getInstance().startCall(networkDelegate,name,c);
+        ApiClient.getInstance().startCall(networkDelegate, name, c);
         this.name = name;
 
 
     }
 
-public void senddata (String s){
-this.data = s;
-    System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+data);
-}
-    public void senddataforCat (String s){
-        this.cat = s;
-        System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+data);
+    public void senddata(String s) {
+        this.data = s;
+
     }
-    public void senddataformealId(String s){
+
+    public void senddataforCat(String s) {
+        this.cat = s;
+    }
+
+    public void senddataformealId(String s) {
         this.mealID = s;
-        System.out.println("AAAAAAAAAAAAAAAAAAASSSSSSSSSS"+mealID);
+    }
+
+    public void retrievequry(String s) {
+        this.mealNameForSearch = s;
+
     }
 
 }

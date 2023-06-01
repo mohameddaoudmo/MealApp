@@ -74,8 +74,8 @@ public class MealView extends AppCompatActivity implements ViewHome {
         removefromFav =findViewById(R.id.removefromfavmealview);
         ProgressBar progressBar = findViewById(R.id.prograssbar);
         linearLayout =findViewById(R.id.linerlayoutmealview);
-        addtocal = findViewById(R.id.addtocalander);
-        removefromcal =findViewById(R.id.removefromcalander) ;
+        addtocal = findViewById(R.id.addtocalanderse);
+        removefromcal =findViewById(R.id.removefromcalanderse) ;
 
 // Set the ProgressBar to be visible
         progressBar.setVisibility(View.VISIBLE);

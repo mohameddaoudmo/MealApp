@@ -59,7 +59,9 @@ public class SignIn extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackManager;
     private LoginButton facebookLoginButton;
-    private  boolean flagToEntryWithoutLogin;
+     private    boolean flagToEntryWithoutLogin;
+     static  public  boolean secondflag ;
+
 
 
 
@@ -68,6 +70,7 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -88,21 +91,16 @@ public class SignIn extends AppCompatActivity {
         googleImageView = findViewById(R.id.googleAuth);
         mCallbackManager = CallbackManager.Factory.create();
         facebookImageView = findViewById(R.id.facebookAuth);
-        remeberme =(CheckBox) findViewById(R.id.checkBox);
-        remeberme.setChecked(true);
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
 
-        String email = preferences.getString("email", "");
-        String password = preferences.getString("password","");
+
         flagToEntryWithoutLogin = preferences.getBoolean("flag",false);
-        if(flagToEntryWithoutLogin){
+        if(flagToEntryWithoutLogin&&secondflag){
+            secondflag=true ;
             startActivity(new Intent(this,MainActivity.class));
         }
 
-        if (!email.isEmpty()) {
-            // Sign in user automatically
-            userLogin(email,password);
-        }
+
 
         facebookLoginButton = findViewById(R.id.facebook_btn);
         facebookLoginButton.setReadPermissions("email", "public_profile");
@@ -130,15 +128,6 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userLogin(emailEditText.getText().toString().trim(),passwordEditText.getText().toString().trim());
-                if (remeberme.isChecked()) {
-                    // Save user details in SharedPreferences
-                    SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
-                    preferences.edit()
-                            .putString("email", emailEditText.getText().toString())
-                            .putString("password", passwordEditText.getText().toString())
-                            .putBoolean("flag",true)
-                            .apply();
-                }
 
             }
         });

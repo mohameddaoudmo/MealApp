@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -31,8 +32,10 @@ import com.example.mealapp.model.Meal;
 import com.example.mealapp.model.RandomMeal;
 import com.example.mealapp.model.Repository;
 import com.example.mealapp.network.ApiClient;
+import com.example.mealapp.sign.SignIn;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     String data;
+    private FirebaseAuth firebaseAuth;
+
 
 
     @Override
@@ -93,7 +98,11 @@ public class MainActivity extends AppCompatActivity{
         });
 
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -105,9 +114,17 @@ public class MainActivity extends AppCompatActivity{
             }else {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
+        } else if (item.getItemId() == R.id.menu_logout) {
+            firebaseAuth.getInstance().signOut();
+            SignIn.secondflag =false;
+            // Redirect the user to the login activity or whatever screen you want them to go to after logging out.
+            Intent intent = new Intent(MainActivity.this, SignIn.class);
+
+            startActivity(intent);
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
 

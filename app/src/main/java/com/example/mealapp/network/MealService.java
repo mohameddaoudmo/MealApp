@@ -22,6 +22,8 @@ public interface MealService {
     Call<Meals> getRandomMeal();
     @GET("filter.php?")
     Call<MyResponse> getAllMealsByArea(@Query("a") String area);
+    @GET("search.php")
+    Call<Meals> searchMeals(@Query("s") String query);
 
     @GET("filter.php?")
     Call<MyResponse> getAllMealsByIngredient(@Query("i") String ingredient);

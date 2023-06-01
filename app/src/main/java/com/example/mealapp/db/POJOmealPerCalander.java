@@ -1,10 +1,11 @@
 package com.example.mealapp.db;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "MealPercal")
+@Entity(tableName = "MealPercal",primaryKeys = {"day", "idMeal"})
 
 public class POJOmealPerCalander {
     public int getDay() {
@@ -15,9 +16,9 @@ public class POJOmealPerCalander {
         this.day = day;
     }
 
-
+    @ColumnInfo(name = "day")
     private int day;
-    @PrimaryKey
+    @ColumnInfo(name = "idMeal")
     private int idMeal;
     private String strMeal;
     private String strDrinkAlternate;

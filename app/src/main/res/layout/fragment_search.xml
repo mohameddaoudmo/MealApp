@@ -4,46 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.Home.View.Home" >
+    tools:context=".search.SearchFragment" >
 
-    <ProgressBar
-        android:id="@+id/prograssbar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="414dp"
-        android:layout_height="124dp"
-        android:layout_marginBottom="250dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2meal"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search..."
+        android:textColor="@color/black"
+        android:searchIcon="@drawable/ic_baseline_search_24"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/scrollView2meal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/scrollView2"
+        android:layout_width="411dp"
+        android:layout_height="494dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view">
 
         <LinearLayout
-            android:id="@+id/linerlayoutmealview"
+
+            android:id="@+id/linerfragmenthome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/meal_imagemealdet"
+                android:id="@+id/meal_imagese"
                 android:layout_width="match_parent"
                 android:layout_height="352dp"
                 android:adjustViewBounds="true"
                 android:scaleType="matrix" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/chango"
-                android:text="@string/name"
-                android:textColor="#0C0C0C"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/meal_namedet"
+                android:id="@+id/meal_namese"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -53,15 +53,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/chango"
-                android:text="@string/catagory"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/meal_categorydet"
+                android:id="@+id/meal_categoryse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -70,103 +62,82 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/meal_arease"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/chango"
-                android:text="@string/area"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/meal_areadet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="MealArea"
 
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/chango"
-                android:text="@string/ingreidient"
-                android:textColor="#1E1E1E"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/meal_ingredientsdet"
+                android:id="@+id/meal_ingredientsse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:text="Meal Ingredients"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/meal_instructions_titledet"
+                android:id="@+id/meal_instructions_titlese"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:text="Instructions"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/meal_instructionsdet"
+                android:id="@+id/meal_instructionsse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Meal Instructions"
 
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/meal_youtube_titledet"
+                android:id="@+id/meal_youtube_titlese"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:text="Watch on YouTube"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/meal_youtube_linkdet"
+                android:id="@+id/meal_youtube_linkse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web"
 
-                android:text="Meal YouTube Link"
                 android:textColor="#000000"
                 android:textColorLink="@color/teal_700"
                 android:textSize="16sp" />
 
             <VideoView
-                android:id="@+id/video_viewdet"
+                android:id="@+id/video_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/addtofavviewmeal"
+                    android:id="@+id/addtofavviewmealhse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/addtofav" />
 
                 <Button
-                    android:id="@+id/removefromfavmealview"
+                    android:id="@+id/removefromfavmealviewhse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="40dp"
                     android:text="@string/removefromfav" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -187,8 +158,8 @@
             </LinearLayout>
 
 
-
         </LinearLayout>
 
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

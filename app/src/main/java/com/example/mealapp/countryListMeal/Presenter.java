@@ -91,8 +91,23 @@ public class Presenter implements NetworkDelegate, ICounPresenter  {
     }
 
     @Override
+    public void onSuccessResultwithsearch(ArrayList<RandomMeal> meal) {
+
+    }
+
+    @Override
     public void onSuccessResultMealPerID(ArrayList<RandomMeal> meal) {
         meal.get(0).getStrArea();
+
+    }
+
+    @Override
+    public void onFailureResultResearch(String errorMessage) {
+
+    }
+
+    @Override
+    public void unchecksuccses(boolean i) {
 
     }
 
