@@ -1,6 +1,8 @@
 package com.example.mealapp.home.Home.View;
 
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.example.mealapp.R;
 import com.example.mealapp.db.ConcreteLocalSource;
 import com.example.mealapp.db.MealPojo;
+import com.example.mealapp.db.POJOmealPerCalander;
 import com.example.mealapp.home.Home.presenter.MainPresenter;
 import com.example.mealapp.model.CategoriesM;
 import com.example.mealapp.model.Country;
@@ -35,6 +38,7 @@ import com.example.mealapp.model.Repository;
 import com.example.mealapp.network.ApiClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -42,6 +46,9 @@ public class Home extends Fragment implements ViewHome {
     TextView name ;
     TextView cata;
     TextView area ;
+    int mounth;
+    Button addtocal;
+    Button removefromcal;
     TextView ingreident;
     TextView instruction , mealinstreaction, watchintoutube,link;
     ImageView photoMeal;
@@ -49,6 +56,8 @@ public class Home extends Fragment implements ViewHome {
     Repository repo ;
     Button addtofav;
     ScrollView scrollView ;
+    POJOmealPerCalander pojOmealPerCalander;
+
 
     Button deletefromfav;
     MealPojo mealPojo;
@@ -64,8 +73,12 @@ public class Home extends Fragment implements ViewHome {
 
         name =view.findViewById(R.id.meal_namese);
         mealPojo = new MealPojo();
+        addtocal=view.findViewById(R.id.addtocalanderse);
+        removefromcal = view.findViewById(R.id.removefromcalanderse);
+
         cata =view.findViewById(R.id.meal_categoryse);
         area=view.findViewById(R.id.meal_arease);
+        pojOmealPerCalander =new POJOmealPerCalander();
         ingreident =view.findViewById(R.id.meal_ingredientsse);
         instruction= view.findViewById(R.id.meal_instructions_titlese);
         mealinstreaction =view.findViewById(R.id.meal_instructionsse);
@@ -81,6 +94,18 @@ public class Home extends Fragment implements ViewHome {
         presenter = new MainPresenter(this,Repository.getInstance(ConcreteLocalSource.getInstance(getContext()), ApiClient.getInstance(),getContext()));
 
         presenter.getRandomMeal();
+        addtocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+        removefromcal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.removemealtocal(pojOmealPerCalander);
+            }
+        });
         addtofav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +118,6 @@ public class Home extends Fragment implements ViewHome {
                 presenter.removemealtofav(mealPojo);
             }
         });
-
 
 
     }
@@ -222,10 +246,13 @@ public class Home extends Fragment implements ViewHome {
                 +meal.get(0).getStrIngredient20());
         instruction.setText(meal.get(0).getStrInstructions());
         mealPojo.setIdMeal(Integer.parseInt(meal.get(0).getIdMeal()));
+        mealPojo.setStrMealThumb(meal.get(0).getStrMealThumb());
+        mealPojo.setStrMealThumb(meal.get(0).getStrMealThumb());
 
         mealPojo.setStrCategory(meal.get(0).getStrCategory());
         mealPojo.setStrYoutube(meal.get(0).getStrArea());
         mealPojo.setStrMeal(meal.get(0).getStrMeal());
+
         mealPojo.setStrArea(meal.get(0).getStrArea());
         mealPojo.setStrIngredient1(meal.get(0).getStrIngredient1());
         mealPojo.setStrIngredient2(meal.get(0).getStrIngredient2());
@@ -236,6 +263,44 @@ public class Home extends Fragment implements ViewHome {
         mealPojo.setStrIngredient7(meal.get(0).getStrIngredient7());
         mealPojo.setStrIngredient8(meal.get(0).getStrIngredient8());
         mealPojo.setStrIngredient9(meal.get(0).getStrIngredient9());
+        mealPojo.setStrIngredient10(meal.get(0).getStrIngredient1());
+        mealPojo.setStrIngredient11(meal.get(0).getStrIngredient2());
+        mealPojo.setStrIngredient12(meal.get(0).getStrIngredient3());
+        mealPojo.setStrIngredient13(meal.get(0).getStrIngredient4());
+        mealPojo.setStrIngredient13(meal.get(0).getStrIngredient5());
+        mealPojo.setStrIngredient14(meal.get(0).getStrIngredient6());
+        mealPojo.setStrIngredient15(meal.get(0).getStrIngredient7());
+        mealPojo.setStrIngredient16(meal.get(0).getStrIngredient8());
+        mealPojo.setStrIngredient17(meal.get(0).getStrIngredient9());
+
+
+        pojOmealPerCalander.setIdMeal(Integer.parseInt(meal.get(0).getIdMeal()));
+        pojOmealPerCalander.setStrMealThumb(meal.get(0).getStrMealThumb());
+        pojOmealPerCalander.setStrMealThumb(meal.get(0).getStrMealThumb());
+
+        pojOmealPerCalander.setStrCategory(meal.get(0).getStrCategory());
+        pojOmealPerCalander.setStrYoutube(meal.get(0).getStrArea());
+        pojOmealPerCalander.setStrMeal(meal.get(0).getStrMeal());
+
+        pojOmealPerCalander.setStrArea(meal.get(0).getStrArea());
+        pojOmealPerCalander.setStrIngredient1(meal.get(0).getStrIngredient1());
+        pojOmealPerCalander.setStrIngredient2(meal.get(0).getStrIngredient2());
+        pojOmealPerCalander.setStrIngredient3(meal.get(0).getStrIngredient3());
+        pojOmealPerCalander.setStrIngredient4(meal.get(0).getStrIngredient4());
+        pojOmealPerCalander.setStrIngredient5(meal.get(0).getStrIngredient5());
+        pojOmealPerCalander.setStrIngredient6(meal.get(0).getStrIngredient6());
+        pojOmealPerCalander.setStrIngredient7(meal.get(0).getStrIngredient7());
+        pojOmealPerCalander.setStrIngredient8(meal.get(0).getStrIngredient8());
+        pojOmealPerCalander.setStrIngredient9(meal.get(0).getStrIngredient9());
+        pojOmealPerCalander.setStrIngredient10(meal.get(0).getStrIngredient1());
+        pojOmealPerCalander.setStrIngredient11(meal.get(0).getStrIngredient2());
+        pojOmealPerCalander.setStrIngredient12(meal.get(0).getStrIngredient3());
+        pojOmealPerCalander.setStrIngredient13(meal.get(0).getStrIngredient4());
+        pojOmealPerCalander.setStrIngredient13(meal.get(0).getStrIngredient5());
+        pojOmealPerCalander.setStrIngredient14(meal.get(0).getStrIngredient6());
+        pojOmealPerCalander.setStrIngredient15(meal.get(0).getStrIngredient7());
+        pojOmealPerCalander.setStrIngredient16(meal.get(0).getStrIngredient8());
+        pojOmealPerCalander.setStrIngredient17(meal.get(0).getStrIngredient9());
 
 
 
@@ -249,5 +314,46 @@ public class Home extends Fragment implements ViewHome {
 
     }
 
+    private void showDatePickerDialog() {
+        // Get the current date
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        // Create a new DatePickerDialog
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), null, year, month, day);
+
+        // Set the title and showthe spinners for the day of the week
+        datePickerDialog.setTitle("Select a day of the week");
+        datePickerDialog.getDatePicker().setCalendarViewShown(false);
+        datePickerDialog.getDatePicker().setSpinnersShown(true);
+
+        // Set the callback to handle the selected date
+        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Get the selected year, month, and day
+                int selectedYear = datePickerDialog.getDatePicker().getYear();
+                int selectedMonth = datePickerDialog.getDatePicker().getMonth();
+                int selectedDayOfMonth = datePickerDialog.getDatePicker().getDayOfMonth();
+                // Create a new Calendar instance and set the selected date
+                Calendar selectedDate = Calendar.getInstance();
+                selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth);
+
+                // Get the day of the week as an integer value
+                int dayOfWeek = selectedDate.get(Calendar.DAY_OF_WEEK);
+                mounth = selectedDate.get(Calendar.DATE);
+                System.out.println(mounth);
+                pojOmealPerCalander.setDay(mounth);
+                presenter.addmealtocal(pojOmealPerCalander);
+
+
+            }
+        });
+
+        // Show the dialog
+        datePickerDialog.show();
+    }
 
 }
