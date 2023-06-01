@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".search.SearchFragment" >
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search..."
+        android:textColor="@color/black"
+        android:searchIcon="@drawable/ic_baseline_search_24"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="411dp"
+        android:layout_height="494dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view">
+
+        <LinearLayout
+
+            android:id="@+id/linerfragmenthome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/meal_imagese"
+                android:layout_width="match_parent"
+                android:layout_height="352dp"
+                android:adjustViewBounds="true"
+                android:scaleType="matrix" />
+
+            <TextView
+                android:id="@+id/meal_namese"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/meal_categoryse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/meal_arease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/meal_ingredientsse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/meal_instructions_titlese"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/meal_instructionsse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/meal_youtube_titlese"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/meal_youtube_linkse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+
+                android:textColor="#000000"
+                android:textColorLink="@color/teal_700"
+                android:textSize="16sp" />
+
+            <VideoView
+                android:id="@+id/video_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/addtofavviewmealhse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addtofav" />
+
+                <Button
+                    android:id="@+id/removefromfavmealviewhse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:text="@string/removefromfav" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/addtocalanderse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addtocal" />
+
+                <Button
+                    android:id="@+id/removefromcalanderse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:text="@string/removeformcal" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,11 @@
-package com.example.mealapp;
+package com.example.mealapp.sign;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.mealapp.R;
 
 public class SplashActivity extends AppCompatActivity {
 

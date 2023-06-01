@@ -1,7 +1,6 @@
-package com.example.mealapp;
+package com.example.mealapp.sign;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -10,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mealapp.R;
+import com.example.mealapp.home.Home.View.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -27,7 +27,6 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -36,7 +35,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,8 +42,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Collections;
 import java.util.Objects;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignIn extends AppCompatActivity {
     private static final int REQ_ONE_TAP = 2 ;// Can be any integer unique to the Activity.
@@ -63,6 +59,9 @@ public class SignIn extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackManager;
     private LoginButton facebookLoginButton;
+     private    boolean flagToEntryWithoutLogin;
+     static  public  boolean secondflag ;
+
 
 
 
@@ -71,6 +70,7 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -91,17 +91,16 @@ public class SignIn extends AppCompatActivity {
         googleImageView = findViewById(R.id.googleAuth);
         mCallbackManager = CallbackManager.Factory.create();
         facebookImageView = findViewById(R.id.facebookAuth);
-        remeberme =(CheckBox) findViewById(R.id.checkBox);
-        remeberme.setChecked(true);
         SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
 
-        String email = preferences.getString("email", "");
-        String password = preferences.getString("password","");
 
-        if (!email.isEmpty()) {
-            // Sign in user automatically
-            userLogin(email,password);
+        flagToEntryWithoutLogin = preferences.getBoolean("flag",false);
+        if(flagToEntryWithoutLogin&&secondflag){
+            secondflag=true ;
+            startActivity(new Intent(this,MainActivity.class));
         }
+
+
 
         facebookLoginButton = findViewById(R.id.facebook_btn);
         facebookLoginButton.setReadPermissions("email", "public_profile");
@@ -129,14 +128,6 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userLogin(emailEditText.getText().toString().trim(),passwordEditText.getText().toString().trim());
-                if (remeberme.isChecked()) {
-                    // Save user details in SharedPreferences
-                    SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
-                    preferences.edit()
-                            .putString("email", emailEditText.getText().toString())
-                            .putString("password", passwordEditText.getText().toString())
-                            .apply();
-                }
 
             }
         });
@@ -231,6 +222,9 @@ public class SignIn extends AppCompatActivity {
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
+                SharedPreferences preferences = getSharedPreferences("user", MODE_PRIVATE);
+                preferences.edit()
+                        .putBoolean("flag", true).apply();
                 startActivity(new Intent(this, MainActivity.class));
                 Toast.makeText(SignIn.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
             } else {

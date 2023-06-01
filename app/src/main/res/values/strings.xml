@@ -16,6 +16,27 @@
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">beb73a5f381ac5cf419dd0855ac09586</string>
     <string name="remeberme">Remember ME</string>
+    <string name="searchbymeals">meals</string>
+    <string name="foodapp">Your Application Food</string>
+    <string name="searchc">search based country</string>
+    <string name="searchbasedcat">Search Based Category</string>
+    <string name="searchbaseding">Search Based ingredient</string>
+    <string name="categories">Categories</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="getinspired">Get inspired</string>
+    <string name="name">Name</string>
+    <string name="ingreidient">Ingredient</string>
+    <string name="instruction">Instruction</string>
+    <string name="catagory">Catagory</string>
+    <string name="area">Area</string>
+    <string name="addtocaleander">Add to Caleander</string>
+    <string name="addtofav">Add to Favourite</string>
+    <string name="removefromfav">Remove From FAVOURITE</string>
+    <string name="deletefromfav">Delete From Favourite</string>
+    <string name="deletefromcal">Delete From Calander</string>
+    <string name="addtocal">Add to Calander</string>
+    <string name="removeformcal">Remove From Calander</string>
 
 
 </resources>
